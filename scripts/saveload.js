@@ -99,7 +99,7 @@ function load(c=1) {
   if (game.t4resets.gte(1)) {
     var tempObj = game.singularityMachineInventory;
     if (tempObj.MoneyBoost.quantity == 0) tempObj.MoneyBoost.quantity = 1;
-    if (tempObj.Incrementer.quantity == 0) tempObj.Incrementer.quantity = 1;
+    if (tempObj.Incrementer.quantity <= 1) tempObj.Incrementer.quantity = 2;
     if (tempObj.Output.quantity == 0) tempObj.Output.quantity = 1;
   }
 
