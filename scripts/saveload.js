@@ -1,5 +1,5 @@
 (function(){
-  savePoint = 'CalculatorEvolution2';
+  savePoint = 'CalculatorEvolutionBeta';
 })();
 
 tempGame = {
