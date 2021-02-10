@@ -109,6 +109,11 @@ function singularity() {
   if (game.t4resets.lt(1) && !confirm("If you go singularity you'll lose everything that you have!\nAre you sure to reset all progress?")) return;
 
   game.t4resets = game.t4resets.add(1);
+  if (game.t4resets.eq(1)) {
+    game.singularityMachineInventory.MoneyBoost.quantity = 1;
+    game.singularityMachineInventory.Incrementer.quantity = 2;
+    game.singularityMachineInventory.Output.quantity = 1;
+  }
   game.singularityPower = game.singularityPower.add(calcSingularityPowerGain());
   singularityReset();
 
