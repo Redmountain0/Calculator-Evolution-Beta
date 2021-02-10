@@ -157,7 +157,7 @@ function renderGrid() {
     [...document.getElementsByClassName("singularityGridMachineTxtQuantity")].forEach((ele, idx) => {
       var tempObj = game.singularityMachineInventory[machineIdx[idx]];
       if (typeof tempObj == "undefined") return;
-      ele.innerHTML = tempObj.quantity-clacMachineLeft(machineIdx[idx]);
+      ele.innerHTML = tempObj.quantity-clacMachineUsed(machineIdx[idx]);
     });
     renderGridSideInfo();
   }
@@ -174,11 +174,11 @@ function singularityGridClick(x, y, side='l') {
   var thisInventory = game.singularityMachineInventory[thisName];
   if (side == "l") {
     if (typeof thisMachine == "undefined") {
-      if (selectedMachine == -1 || typeof thisInventory == "undefined" || thisInventory.quantity-clacMachineLeft(thisName) < 1 || calcProcessLeft() < 1) return;
+      if (selectedMachine == -1 || typeof thisInventory == "undefined" || thisInventory.quantity-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1) return;
       game.singularityGrid[x + '' + y] = new SingularityMachine({position: {x: x, y: y}, rotate: 0, tier: 0, type: thisName, value: D(1)});
       singularityMachineChanged();
     } else if (thisName == thisMachine.type) {
-      if (thisInventory.quantity < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) return;
+      if (thisInventory.quantity-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) return;
       game.singularityGrid[x + '' + y].tier++;
     } else {
       thisMachine.rotate = (thisMachine.rotate+1)%4;
@@ -232,7 +232,7 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
 function calcGridOpened() {
   return 4;
 }
-function clacMachineLeft(name) {
+function clacMachineUsed(name) {
   if (typeof name == "number") name = machineIdx[name];
   var tempUsed = 0;
   for (var i in game.singularityGrid) if (game.singularityGrid[i].type == name) tempUsed += game.singularityGrid[i].tier+1;
