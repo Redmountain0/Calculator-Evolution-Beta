@@ -275,6 +275,7 @@ body {
 }
 #singularityEffects {
   padding: 1vh;
+  font-size: 1.5vh;
   animation: greenGlow ease 5s infinite;
   line-height: 200%;
 }
