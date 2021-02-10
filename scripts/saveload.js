@@ -86,7 +86,7 @@ function load(c=1) {
   }
 
   // fill save
-  for (var i = 0, l = machineIdx.length; i < l; i++) if (typeof game.singularityMachineInventory == "undefined") game.singularityMachineInventory[machineIdx[i]] = {quantity: 0};
+  for (var i = 0, l = machineIdx.length; i < l; i++) if (typeof game.singularityMachineInventory[i] == "undefined") game.singularityMachineInventory[machineIdx[i]] = {quantity: 0};
 
   // old version fix
   if (game.researchSpeed.length == 5) {
