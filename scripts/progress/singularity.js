@@ -420,7 +420,7 @@ class SingularityMachine {
   getPointedMachine = () => {return game.singularityGrid[this.getPointed()]};
 
   getPower () {
-    var power = this.value.mul(D(100).pow(this.tier));
+    var power = this.value.mul(D(1e4).pow(this.tier));
     var iMachines = this.getInteracts();
     if (this.type != "Booster") for (var i = 0, l = iMachines.length; i < l; i++) if (iMachines[i].type == "Booster") power = power.mul(iMachines[i].getPower());
     power = power.pow(this.tier/20+0.5);
