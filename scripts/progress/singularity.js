@@ -157,8 +157,7 @@ function renderSingularity() {
   $("#singularityDesc").innerHTML += `<br>You have ${dNotation(game.singularityPower, 4, 0)} Singularity Power`;
   $("#singularityDesc").innerHTML += `<br>Each SP increases Multi Process by 4 (tot ${Math.floor(Math.min(25/4, game.singularityPower.valueOf())*4)}, cap at 25)`
   $("#singularityDesc").innerHTML += `<br>And boosts grid machine Power by x${dNotation(game.singularityPower.pow(4), 4, 0)}`;
-  if (!canEnterWoemholeChallenge()) $("#singularityDesc").innerHTML += `<br><br>Go singularity ${calcWormholeChallengeReq()} times to unlock Wormhole Challenges`;
-  $("#wormholeChallengeWarp").style.display = canEnterWoemholeChallenge() ? "block" : "none";
+  $("#wormholeChallengeWarp").style.display = game.t4resets.gte(2) ? "block" : "none";
   $("#gridReq").innerHTML = `Complete ${4-(calcChallengeDone()+3)%4} more challenge to unlock ${ordNum(calcGridOpened()+1)} Grid space`;
   $("#challengeReq").innerHTML = `Go singularity ${dNotation(game.t4resets.toNumber(), 4, 0)}/${calcWormholeChallengeReq()} times to enter Challenge (Increases per challenge complete)`;
   [...document.getElementsByClassName("wormholeChallenge")].forEach((ele, idx) => ele.style.setProperty("--progress", `${10*game.wormholeChallengeProgress[idx]}%`));
@@ -326,7 +325,7 @@ function calcGridMult() {
   return mul;
 }
 function calcWormholeChallengeReq() {
-  return 2+calcChallengeDone()**1.2;
+  return Math.floor(2+calcChallengeDone()**1.2);
 }
 function canJoinWormholeChallenge() {
   return game.t4resets.gte(calcWormholeChallengeReq());
