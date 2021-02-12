@@ -241,8 +241,8 @@ function wormholeChallengeEnter(idx) {
   }
 }
 function renderSingularityInfo() {
-  $("#singularityInfo").style.display = game.challengeEntered == -1 ? "none" : "none";
-  $("#singularityInfo").innerHTML = "Challenge Fail: " + timeNotation(calcChallengeTimeLeft());
+  $("#singularityInfo").style.display = game.challengeEntered != -1 ? "block" : "none";
+  $("#singularityInfo").innerHTML = `In Challenge ${game.challengeEntered+1}`;
 }
 
 // dom
