@@ -456,7 +456,7 @@ function calcProcessActive() {
 function calcMultiProcess() {
   var maxProcess = game.researchLevel[1]+1;
   maxProcess += Math.floor(Math.min(25/4, game.singularityPower.valueOf())*4);
-  if (game.challengeEntered != 7) maxProcess = Math.floor(maxProcess/10);
+  if (game.challengeEntered == 7) maxProcess = Math.floor(maxProcess/10);
   return maxProcess;
 }
 function calcProcessLeft() {
