@@ -348,7 +348,7 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
       break;
   }
   if (lv >= 5) goal = goal.mul(lv/2);
-  return goal;
+  return goal.floor(0);
 }
 function calcChallengeTimeLeft() {
   return (game.challengeTime - new Date().getTime())/1000 + 60*30;
