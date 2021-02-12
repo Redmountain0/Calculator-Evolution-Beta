@@ -346,6 +346,27 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
     case 0:
       goal = D(1).add(lv**2);
       break;
+    case 1:
+      goal = D(1).add(lv**2);
+      break;
+    case 2:
+      goal = D(2).mul(lv+1);
+      break;
+    case 3:
+      goal = D(10).mul((lv+1)**2);
+      break;
+    case 4:
+      goal = D(2).add(lv**3);
+      break;
+    case 5:
+      goal = D(50).add(10*lv);
+      break;
+    case 6:
+      goal = D(80).add((10+lv)*lv);
+      break;
+    case 7:
+      goal = D(80).add((7+lv**2)*lv);
+      break;
   }
   if (lv >= 5) goal = goal.mul(lv/2);
   return goal.floor(0);
@@ -412,11 +433,26 @@ class SingularityMachine {
     var value = this.value;
     var effect = D(0);
     switch (this.type) {
+      case "BaseBoost":
+        effect = power.log(10);
+        break;
+      case "DigitBoost":
+        effect = power.log(5);
+        break;
       case "MoneyBoost":
         effect = power.mul(power.add(1).log(10)).mul(value.add(1).log(10).pow(2)).add(1);
         break;
-      case "BaseBoost":
-        effect = power.log(10);
+      case "RpBoost":
+        effect = power.div(1e5).add(1).log(10).pow(2).add(1);
+        break;
+      case "ResearchSpeedBoost":
+        effect = power.pow(0.8).add(1);
+        break;
+      case "SpeedBoost":
+        effect = power.log(10).pow(0.7).add(1);
+        break;
+      case "QubitBoost":
+        effect = power.pow(0.75).add(1);
         break;
     }
     return effect;
