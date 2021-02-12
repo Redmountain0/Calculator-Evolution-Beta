@@ -408,7 +408,7 @@ body {
   height: 6vh;
 }
 #rpDisplay {
-  margin-top: 1vh;
+  margin-top: 3vh;
   font-size: 3.6vh;
   animation: greenGlow ease 2.5s infinite;
 }
