@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animation.css?ver=1.0.b8">
-    <link rel="stylesheet" href="index.css?ver=1.0.b8">
+    <link rel="stylesheet" href="animation.css?ver=1.0.b9">
+    <link rel="stylesheet" href="index.css?ver=1.0.b9">
     <script src="./scripts/decimalMin.js"></script>
-    <script src="./scripts/index.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/numberFunc.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/achievement.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/progress/game.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/progress/reboot.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/progress/quantum.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/progress/singularity.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/saveload.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/loop.js?ver=1.0.b8" defer></script>
-    <script src="./scripts/reset.js?ver=1.0.b8" defer></script>
-    <title>Calculator Evolution v1.0.b8</title>
+    <script src="./scripts/index.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/numberFunc.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/achievement.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/progress/game.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/progress/reboot.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/progress/quantum.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/progress/singularity.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/saveload.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/loop.js?ver=1.0.b9" defer></script>
+    <script src="./scripts/reset.js?ver=1.0.b9" defer></script>
+    <title>Calculator Evolution v1.0.b9</title>
   </head>
   <body>
     <div id="warpAll">
@@ -479,10 +479,21 @@
           </div>
           <div id="wormholeChallengeWarp" style="display: none">
             <div id="wormholeChallengeHeader">
-              
+              <div id="gridReq">
+                Complete 4 more challenges to unlock 5th Grid space
+              </div>
+              <div id="challengeReq">
+                Go singularity 0/2 times to enter Challenge (Increases per challenge complete)
+              </div>
+              <div id="challengeDesc">
+                Reward of challenges are one of it's Machine and a Incrementer and a SP
+              </div>
             </div>
             <div id="wormholeChallengeInnerWarp">
               
+            </div>
+            <div id="exitChallenge" onclick="if(confirm('Are you sure to exit the challenge?')){game.challengeEntered = -1; singularityReset();}">
+              Exit challenge
             </div>
           </div>
         </div>
@@ -496,6 +507,9 @@
         </div>
         <div id="overclockInfo" style="display:none;">
           Overclock Mult: x1<br>Durability: 1
+        </div>
+        <div id="singularityInfo" style="display:none;">
+          Challene Fail: 10 mins
         </div>
       </div>
       <div id="debugInfoArea">

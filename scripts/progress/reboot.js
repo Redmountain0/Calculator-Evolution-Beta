@@ -62,6 +62,8 @@ function calcRebootCooldown() {
   return 5000*((2/3)**game.researchLevel[7])/(game.quantumUpgradeBought.includes('44')?10:1);
 }
 function researchBuy(num) {
+  if (game.challengeEntered == 5 &&  3 <= num && num < 6) return;
+
   if (game.quantumUpgradeBought.includes('42')) {
     researchMaxBuy(num);
     return;
@@ -150,6 +152,7 @@ function calcPerResearchSpeedBaseBeforeMult() {
 function calcPerResearchSpeedBase() {
   var base = calcPerResearchSpeedBaseBeforeMult();
   if (game.quantumUpgradeBought.includes('23')) base = base.mul(10);
+  if (game.challengeEntered == 4) base = base.div(20);
   return base;
 }
 function calcResearchSpeed(lv) {

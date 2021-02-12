@@ -32,6 +32,9 @@ function renderAll() {
     case 2:
     renderResearch();
       break;
+    case 3:
+    renderAchievements()
+      break;
     case 4:
     renderOption();
       break;
@@ -50,6 +53,7 @@ function renderInfo() {
   $('#infoArea').style.display = (game.t2toggle ? 'block' : 'none')
   renderBasicInfo();
   renderOverclockInfo();
+  renderSingularityInfo();
 }
 function calcAll() {
   calcToggleTabs();

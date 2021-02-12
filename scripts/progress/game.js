@@ -320,6 +320,7 @@ function calcCPU() {
   if (game.quantumUpgradeBought.includes('14')) tempVar = tempVar.mul(D(9).pow(game.quantumLab));
   if (game.quantumUpgradeBought.includes('15')) tempVar = tempVar.mul(D(30).pow(D.max(0, calcMaxDigit().sub(game.digits))));
   if (game.quantumUpgradeBought.includes('16')) tempVar = tempVar.mul(game.researchPoint.add(1).pow(0.25));
+  if (game.challengeEntered == 2) tempVar = tempVar.pow(0.5);
   return tempVar;
 }
 function calcShopCost(idx, lv) {
@@ -349,12 +350,14 @@ function calcMaxDigit() {
   var tempNum = D(6);
   tempNum = tempNum.plus(game.researchLevel[2]);
   if (game.quantumUpgradeBought.includes('12')) tempNum = tempNum.plus(game.base.pow(0.6).floor());
+  if (game.challengeEntered == 1) tempNum = D(8);
   tempNum = tempNum.add(singularityBoosts.DigitBoost);
   return tempNum.floor(0);
 }
 function calcMaxBase() {
   var tempNum = D(36);
   if (game.shopBought[0] >= 3) tempNum = tempNum.add(game.digits);
+  if (game.challengeEntered == 0) tempNum = D.min(50, tempNum);
   tempNum = tempNum.add(singularityBoosts.BaseBoost);
   return tempNum.floor(0);
 }
@@ -377,7 +380,7 @@ function getBaseIncreaseReq() {
   ).sub(1);
 }
 function calcProgram() {
-  if (rebooting) {
+  if (rebooting || isProcessExceed()) {
     return;
   }
   if (game.programActive[0]) {
@@ -453,10 +456,14 @@ function calcProcessActive() {
 function calcMultiProcess() {
   var maxProcess = game.researchLevel[1]+1;
   maxProcess += Math.floor(Math.min(25/4, game.singularityPower.valueOf())*4);
+  if (game.challengeEntered != 7) maxProcess = Math.floor(maxProcess/10);
   return maxProcess;
 }
 function calcProcessLeft() {
   return calcMultiProcess()-calcProcessActive();
+}
+function isProcessExceed() {
+  return calcProcessLeft() < 0;
 }
 
 function bugFixer() {

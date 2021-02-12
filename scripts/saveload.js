@@ -13,17 +13,17 @@ tempGame = {
   digits: D(1),
   mDigits: D(6),
   tLast: new Date().getTime(),
-  programActive: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  programActive: new Array(15).fill(0),
   money: D(0),
-  shopBought: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  shopBought: new Array(15).fill(0),
   researchPoint: D(0),
-  researchSpeed: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  researchLevel: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  researchProgress: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  researchSpeed: new Array(9).fill(0),
+  researchLevel: new Array(9).fill(0),
+  researchProgress: new Array(9).fill(0),
   rebootTime: new Date().getTime(),
   t2toggle: 0,
   t2resets: D(0),
-  optionToggle: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  optionToggle: new Array(9).fill(1),
   achievements: [],
   durability: D(1),
   t3toggle: 0,
@@ -33,16 +33,17 @@ tempGame = {
   qubitProgress: D(0),
   quantumUpgradeBought: [],
   quantumUpgradePreset: {},
-  quantumAutomateToggle: [1, 1, 1, 1, 1, 1],
+  quantumAutomateToggle: new Array(5).fill(1),
   quantumTime: new Date().getTime(),
   t4toggle: 0,
   t4resets: D(0),
   singularityTime: new Date().getTime(),
-  singularityMachineInventory: {},
   singularityGrid: {},
   singularityGridActivate: 0,
   singularityPower: D(0),
-  wormholeChallengeDone: []
+  wormholeChallengeProgress: new Array(8).fill(0),
+  challengeEntered: -1,
+  challengeTime: new Date().getTime()
 };
 game = {};
 
@@ -85,9 +86,6 @@ function load(c=1) {
     game.singularityGrid[i].value = D(game.singularityGrid[i].value);
   }
 
-  // fill save
-  for (var i = 0, l = machineIdx.length; i < l; i++) if (typeof game.singularityMachineInventory[machineIdx[i]] == "undefined") game.singularityMachineInventory[machineIdx[i]] = {quantity: 0};
-
   // old version fix
   if (game.researchSpeed.length == 5) {
     for (var i = 0; i < 4; i++) {
@@ -95,12 +93,6 @@ function load(c=1) {
       game.researchLevel.push(0);
       game.researchProgress.push(0);
     }
-  }
-  if (game.t4resets.gte(1)) {
-    var tempObj = game.singularityMachineInventory;
-    if (tempObj.MoneyBoost.quantity == 0) tempObj.MoneyBoost.quantity = 1;
-    if (tempObj.Incrementer.quantity <= 1) tempObj.Incrementer.quantity = 2;
-    if (tempObj.Output.quantity == 0) tempObj.Output.quantity = 1;
   }
 
   if (c) commandAppend('load', 70);
