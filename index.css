@@ -79,6 +79,26 @@ body {
   cursor: pointer;
   animation: t3Animation ease 3s infinite;
 }
+.t3Nav.available {
+  background-color: rgba(153, 31, 180, 0.5);
+  transition: all 0.3s;
+}
+.t3Nav.available > span {
+  background: linear-gradient(
+    90deg,
+    #9000ff 0%,
+    #00f 25%,
+    #00d5ff 37.5%,
+    #0f0 50%,
+    #5eff00 62.5%,
+    #f00 75%,
+    #ffea00 100%
+  );
+  text-shadow: 0 0 1vh #aaa;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s;
+}
 .t4Nav {
   border: 0.35vh solid #19306b;
   background-color: rgba(6, 17, 46, 0.5);

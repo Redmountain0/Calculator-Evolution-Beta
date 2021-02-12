@@ -97,7 +97,7 @@
   tpsRecording = 0;
   lastTpsRecord = new Date().getTime();
 })();
-
+tempA = 0;
 function renderBasic() {
   $("#basedNumber").innerHTML = formatWithBase(game.number, game.base, game.digits, 1, 80);
   $("#money").innerHTML = dNotation(game.money, 5);
@@ -111,6 +111,7 @@ function renderBasic() {
 
   //tabs
   $('#mainNav > .tabNav:nth-child(7)').style.display = (game.t3toggle ? 'inline-block' : 'none');
+  $('#mainNav > .tabNav:nth-child(7)').classList[calcQuantumLabGain().gte(1)||tempA?"add":"remove"]("available")
   $('#mainNav > .tabNav:nth-child(8)').style.display = (game.t4toggle ? 'inline-block' : 'none');
 
   commandFloat();
