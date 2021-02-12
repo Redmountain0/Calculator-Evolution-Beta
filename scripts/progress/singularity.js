@@ -169,18 +169,12 @@ function renderSingularity() {
 function calcSingularity() {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
   for (var i in game.singularityGrid) game.singularityGrid[i].update();
-  if (game.challengeEntered != -1) {
-    if (game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
-      wormholeChallengeProgress[game.challengeEntered]++;
-      game.singularityPower = game.singularityPower.add(1);
-      game.challengeEntered = -1;
-      singularityReset();
-      commandAppend("Challenge Done!", 30, 1);
-    } else if (calcChallengeTimeLeft() < 0) {
-      game.challengeEntered = -1;
-      singularityReset();
-      commandAppend("Challenge Fail...", 30, 1);
-    }
+  if (game.challengeEntered != -1 && game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
+    wormholeChallengeProgress[game.challengeEntered]++;
+    game.singularityPower = game.singularityPower.add(1);
+    game.challengeEntered = -1;
+    singularityReset();
+    commandAppend("Challenge Done!", 30, 1);
   }
 }
 function renderGrid() {
@@ -242,8 +236,7 @@ function wormholeChallengeEnter(idx) {
   }
 }
 function renderSingularityInfo() {
-  $("#singularityInfo").style.display = game.challengeEntered == -1 ? "none" : "block";
-  $("#singularityInfo").innerHTML = "Challenge Fail: " + timeNotation(calcChallengeTimeLeft());
+  
 }
 
 // dom
@@ -349,9 +342,6 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
   }
   if (lv >= 5) goal = goal.mul(lv/2);
   return goal;
-}
-function calcChallengeTimeLeft() {
-  return (game.challengeTime - new Date().getTime())/1000 + 60*30;
 }
 
 // SingularityMachine
