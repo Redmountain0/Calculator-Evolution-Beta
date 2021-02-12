@@ -210,7 +210,7 @@ function getQuantumReqPow() {
   var researchPow = D(totPow);
   if (game.quantumUpgradeBought.includes('16')) researchPow = researchPow.div(2);
 
-  return (game.challengeEntered != 6 ? [moneyPow, researchPow] ? [D(1), D(1)]);
+  return (game.challengeEntered != 6 ? [moneyPow, researchPow] : [D(1), D(1)]);
 }
 function calcQuantumLabGain() {
   // Money: start from e100, +e5, +e15, +e25, +e35  ... -> (n*(n-1)+n)*5
