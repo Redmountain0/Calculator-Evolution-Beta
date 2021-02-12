@@ -98,7 +98,7 @@
     $("#wormholeChallengeInnerWarp").append(cahllengeNode);
 
     var nameNode = document.createElement("div");
-    nameNode.innerHTML = `${thisData.name} Challenge`;
+    nameNode.innerHTML = `${thisData.name} Challenge (0/10)`;
     nameNode.classList.add("wormholeChallengeName");
     cahllengeNode.append(nameNode);
 
@@ -160,6 +160,7 @@ function renderSingularity() {
   $("#wormholeChallengeWarp").style.display = game.t4resets.gte(2) ? "block" : "none";
   $("#gridReq").innerHTML = `Complete ${4-(calcChallengeDone()+3)%4} more challenge to unlock ${ordNum(calcGridOpened()+1)} Grid space`;
   $("#challengeReq").innerHTML = `Go singularity ${dNotation(game.t4resets.toNumber(), 4, 0)}/${calcWormholeChallengeReq()} times to enter Challenge (Increases per challenge complete)`;
+  [...document.getElementsByClassName("wormholeChallengeName")].forEach((ele, idx) => ele.innerHTML = `${singularityMachineData[challengeIdx[idx]].name} Challenge (${game.wormholeChallengeProgress[idx]}/10)`);
   [...document.getElementsByClassName("wormholeChallenge")].forEach((ele, idx) => ele.style.setProperty("--progress", `${10*game.wormholeChallengeProgress[idx]}%`));
   [...document.getElementsByClassName("wormholeChallengeEffect")].forEach((ele, idx) => ele.innerHTML = challengeDesc[idx]);
   [...document.getElementsByClassName("wormholeChallengeGoal")].forEach((ele, idx) => ele.innerHTML = `Goal: ${dNotation(calcChallengeGoal(idx), 4, 0)} QL`);
