@@ -235,7 +235,7 @@ function getSingularityMachineHave(name) {
 }
 function wormholeChallengeEnter(idx) {
   if (game.challengeEntered == -1) {
-    if (!canJoinWormholeChallenge() || !(calcChallengeDone() > 10 || confirm(`Do you want to enter wormhole challenge?\nEntering will preform Singularity reset without SP`))) return;
+    if (!canJoinWormholeChallenge() || !(calcChallengeDone() > 10 || confirm(`Do you want to enter wormhole challenge?\nEntering will perform Singularity reset without SP`))) return;
     game.challengeTime = new Date().getTime();
     game.challengeEntered = idx;
     singularityReset();
