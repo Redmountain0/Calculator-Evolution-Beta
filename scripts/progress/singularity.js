@@ -16,7 +16,7 @@
   challengeIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost",  "Booster"];
   challengeDesc = [
     "Base is capped at 50 (can extend with only grid)",
-    "Digit is capped at 8 (can extend with only grid)",
+    "Digit is capped at 20 (can extend with only grid)",
     "Sqrt CPU upgrade effect",
     "All quantum upgrade cost x2",
     "Divied research upgrade effect by 20",

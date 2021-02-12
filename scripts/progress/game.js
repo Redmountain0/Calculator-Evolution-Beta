@@ -351,7 +351,7 @@ function calcMaxDigit() {
   var tempNum = D(6);
   tempNum = tempNum.plus(game.researchLevel[2]);
   if (game.quantumUpgradeBought.includes('12')) tempNum = tempNum.plus(game.base.pow(0.6).floor());
-  if (game.challengeEntered == 1) tempNum = D(8);
+  if (game.challengeEntered == 1) tempNum = D.min(tempNum, 20);
   tempNum = tempNum.add(singularityBoosts.DigitBoost);
   return tempNum.floor(0);
 }
