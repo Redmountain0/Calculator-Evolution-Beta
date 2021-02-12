@@ -15,7 +15,7 @@
   machineIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost", "Incrementer", "Booster", "Merger", "Output"];
   challengeIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost",  "Booster"];
   challengeDesc = [
-    "Base is capped at 50 (can extend with only grid)",
+    "Base is capped at 36 (can extend with only grid)",
     "Digit is capped at 8 (can extend with only grid)",
     "Sqrt CPU upgrade effect",
     "All quantum upgrade cost x2",
@@ -169,12 +169,18 @@ function renderSingularity() {
 function calcSingularity() {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
   for (var i in game.singularityGrid) game.singularityGrid[i].update();
-  if (game.challengeEntered != -1 && game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
-    wormholeChallengeProgress[game.challengeEntered]++;
-    game.singularityPower = game.singularityPower.add(1);
-    game.challengeEntered = -1;
-    singularityReset();
-    commandAppend("Challenge Done!", 30, 1);
+  if (game.challengeEntered != -1) {
+    if (game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
+      game.wormholeChallengeProgress[game.challengeEntered]++;
+      game.singularityPower = game.singularityPower.add(1);
+      game.challengeEntered = -1;
+      singularityReset();
+      commandAppend("Challenge Done!", 30, 1);
+    } else if (calcChallengeTimeLeft() < 0) {
+      /*game.challengeEntered = -1;
+      singularityReset();
+      commandAppend("Challenge Fail...", 30, 1);*/
+    }
   }
 }
 function renderGrid() {
@@ -229,14 +235,15 @@ function getSingularityMachineHave(name) {
 }
 function wormholeChallengeEnter(idx) {
   if (game.challengeEntered == -1) {
-    if (!canJoinWormholeChallenge() || !(calcChallengeDone() > 10 || confirm(`Do you want to enter wormhole challenge?\nEntering will perform Singularity reset without SP`))) return;
+    if (!canJoinWormholeChallenge() || !(calcChallengeDone() > 10 || confirm(`Do you want to enter wormhole challenge?\nEntering will preform Singularity reset without SP`))) return;
     game.challengeTime = new Date().getTime();
     game.challengeEntered = idx;
     singularityReset();
   }
 }
 function renderSingularityInfo() {
-  
+  $("#singularityInfo").style.display = game.challengeEntered == -1 ? "none" : "none";
+  $("#singularityInfo").innerHTML = "Challenge Fail: " + timeNotation(calcChallengeTimeLeft());
 }
 
 // dom
@@ -342,6 +349,9 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
   }
   if (lv >= 5) goal = goal.mul(lv/2);
   return goal;
+}
+function calcChallengeTimeLeft() {
+  return (game.challengeTime - new Date().getTime())/1000 + 60*30;
 }
 
 // SingularityMachine

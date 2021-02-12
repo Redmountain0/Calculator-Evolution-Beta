@@ -5,7 +5,7 @@
     'Sacrifice', 'A to z', 'Sacrifice II', 'Rich', 'Ultimate Science',
     'New Age', '2^10', 'Skilled', 'Lab Town', '2^50',
     'Richer', 'A to Œ', 'Infinity Research', 'Infinity Boost', '2 more?',
-    'Singularity', 'Second Singularity', 'Speed Challenge', 'Bulk QL Challenge', 'More Challenges'
+    'Singularity', 'Second Singularity', 'Challenge', 'Bulk QL Challenge', 'More Challenges'
   ];
   achievementGoal = [
     'Reach ${formatWithBase(63, game.base)}', 'Have a ${dNotation(1, 0, 0)} $', 'Buy ${dNotation(3, 0, 0)} CPU upgrade', 'Reach base ${dNotation(10, 0, 0)}', 'Reach base ${dNotation(36, 0, 0)}',
