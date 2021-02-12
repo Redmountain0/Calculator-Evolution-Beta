@@ -15,7 +15,7 @@
   machineIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost", "Incrementer", "Booster", "Merger", "Output"];
   challengeIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost",  "Booster"];
   challengeDesc = [
-    "Base is capped at 36 (can extend with only grid)",
+    "Base is capped at 50 (can extend with only grid)",
     "Digit is capped at 8 (can extend with only grid)",
     "Sqrt CPU upgrade effect",
     "All quantum upgrade cost x2",
