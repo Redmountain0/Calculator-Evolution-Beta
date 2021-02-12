@@ -335,7 +335,7 @@ function canEnterWoemholeChallenge() {
   return game.t4resets.gte(calcWormholeChallengeReq());
 }
 function calcRealTgain() {
-  return tGain*singularityBoostsBase.SpeedBoost.toNumber();
+  return tGain*singularityBoosts.SpeedBoost.toNumber();
 }
 function calcChallengeDone() {
   return game.wormholeChallengeProgress.reduce((a, b) => a + b, 0);
