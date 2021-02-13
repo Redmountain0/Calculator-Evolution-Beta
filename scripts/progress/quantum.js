@@ -101,7 +101,7 @@ function renderQunatum() {
 function calcQuantum() {
   if (game.quantumUpgradeBought.includes('46') && D(3).pow(game.qubit.add(1)).sub(game.qubitProgress).div(calcQubitSpeed()).lte(60*7)) game.qubitProgress = D(3).pow(game.qubitProgress.add(1).log(3).ceil(0));
   game.qubitProgress = game.qubitProgress.add(calcQubitSpeed().mul(calcRealTgain()));
-  game.qubit = D.max(0, game.qubitProgress.add(1).log(3)).floor(0);
+  game.qubit = D.max(0, game.qubitProgress.add(1).log(3)).floor(0).add(calcChallengeDone());
   calcQuantumAuto();
 }
 function calcQuantumAuto() {
