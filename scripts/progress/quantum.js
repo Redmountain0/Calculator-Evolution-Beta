@@ -235,7 +235,7 @@ function calcQubitSpeed() {
   var tempSpd = game.quantumLab.pow(game.quantumLab.sqrt(2)).mul(D(10).add(game.quantumLab.pow(2)).pow(game.quantumLab.sub(1))).sub(0.1);
   if (game.quantumUpgradeBought.includes('31')) tempSpd = tempSpd.mul(100);
   if (game.quantumUpgradeBought.includes('33')) tempSpd = tempSpd.mul(D(1.3).pow(game.qubit));
-  if (game.quantumUpgradeBought.includes('34')) tempSpd = tempSpd.mul(D.min(game.number.add(1).log(10).div(10).sqrt(2), 1).add(1).pow(game.number.add(1).log(10).pow(0.6)));
+  if (game.quantumUpgradeBought.includes('34')) tempSpd = tempSpd.mul(D.min(D.max(game.number, 0).add(1).log(10).div(10).pow(0.5), 1).add(1).pow(D.max(game.number, 0).add(1).log(10).pow(0.6)));
   if (game.quantumUpgradeBought.includes('35')) tempSpd = tempSpd.mul(D(10).pow([...new Set(game.quantumUpgradeBought)].length));
   tempSpd = tempSpd.mul(27); // boost
   tempSpd = tempSpd.mul(singularityBoosts.QubitBoost);
