@@ -519,15 +519,25 @@ body {
   width: 10vh; height: 10vh;
   color: #fff; text-shadow: 0 0 1vh #fff; font-size: 1.5vh;
   background-color: #080;
-  translate: filter 0.3s;
+  transition: background-color 0.3s;
 }
 #achWarp > tbody > tr > td:hover {
-  filter: grayscale(1);
+  background-color: #050;
 }
 #achDesc {
-  font-size: 1.3vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: greenGlow ease 5s infinite;
+  position: absolute;
+  padding: 0.3vh 0.5vw;
+  font-size: 1.8vh;
+  text-align: center;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: 0.3vh solid #fff;
+  box-shadow: 0 0 0.3vh #fff inset, 0 0 0.5vh #fff;
+  backdrop-filter: blur(0.5vh) brightness(1.4);
+  opacity: 0;
+  animation: var(--whiteglow);
+  border-radius: 0.6vh;
+  pointer-events: none;
+  transition: opacity 0.3s, top 0.2s, left 0.2s;
 }
 
 .tab:nth-of-type(5) {

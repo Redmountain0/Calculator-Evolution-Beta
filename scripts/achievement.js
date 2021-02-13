@@ -5,15 +5,17 @@
     'Sacrifice', 'A to z', 'Sacrifice II', 'Rich', 'Ultimate Science',
     'New Age', '2^10', 'Skilled', 'Lab Town', '2^50',
     'Richer', 'A to Œ', 'Infinity Research', 'Infinity Boost', '2 more?',
-    'Singularity', 'Second Singularity', 'Challenge', 'Bulk QL Challenge', 'More Challenges'
+    'Singularity', 'Second Singularity', 'Challenge', 'Bulk QL Challenge', 'More Challenges',
+    'Singularit\nies', 'none', 'none', 'none', 'Bugged Reality'
   ];
   achievementGoal = [
-    'Reach ${formatWithBase(63, game.base)}', 'Have a ${dNotation(1, 0, 0)} $', 'Buy ${dNotation(3, 0, 0)} CPU upgrade', 'Reach base ${dNotation(10, 0, 0)}', 'Reach base ${dNotation(36, 0, 0)}',
+    'Reach ${formatWithBase(63, game.base)}(${dNotation(game.base, 4, 0)})', 'Have a ${dNotation(1, 0, 0)} $', 'Buy ${dNotation(3, 0, 0)} CPU upgrade', 'Reach base ${dNotation(10, 0, 0)}', 'Reach base ${dNotation(36, 0, 0)}',
     'Perform Reboot', 'Reach Bonus CPU Level ${dNotation(3, 0, 0)}', 'Reach Multi Process Level ${dNotation(1, 0, 0)}', 'Reach Extra Digit Level ${dNotation(5, 0, 0)}', 'Have ${dNotation(1e3, 4, 0)} RP',
     'Perform Overclock', 'Reach base ${dNotation(62, 4, 0)}', 'Perform Overclock with Power ${dNotation(1e10, 4, 0)}', 'Have ${dNotation(1e100)} $', 'Have ${dNotation(1.11e11, 4, 0)} RP',
-    'Perform Quantum', 'Have ${dNotation(10, 4, 0)} Qubits', 'Have ${dNotation(8, 4, 0)} Quantum Upgrades', 'Have ${dNotation(50, 4, 0)} Qubits',
-    'Have ${dNotation(1e1000, 4, 0)} $', 'Reach base ${dNotation(250, 4, 0)}', 'Have ${dNotation(D(2).pow(1024), 6, 0)}', 'Have ${dNotation(1024, 4, 0)} Qubits', 'Have dNotation(82, 0, 0) Labs',
-    'Go singularity', 'Go singularity one more time', 'Complete a challenge', 'Reach bulk ${dNotation(20, 0, 0)} Quantum Labs', 'Complete ${dNotation(10, 0, 0)} Challenges'
+    'Perform Quantum', 'Have ${dNotation(10, 4, 0)} Qubits', 'Have ${dNotation(8, 4, 0)} Quantum Upgrades', "Have ${dNotation(7, 0, 0)} Quantum Labs", 'Have ${dNotation(50, 4, 0)} Qubits',
+    'Have ${dNotation(1e1000, 4, 0)} $', 'Reach base ${dNotation(250, 4, 0)}', 'Have ${dNotation(D(2).pow(1024), 6, 0)}', 'Have ${dNotation(1024, 4, 0)} Qubits', 'Have ${dNotation(82, 0, 0)} Labs',
+    'Go singularity', 'Go singularity one more time', 'Complete a challenge', 'Reach bulk ${dNotation(20, 0, 0)} Quantum Labs', 'Complete ${dNotation(10, 0, 0)} Challenges',
+    'Go singularity ${dNotation(100, 0, 0)} times', 'Coming soon', 'Coming soon', 'Coming soon', 'Reach Infinity$'
   ];
   achievementGoalFunc = [
     'game.number.gte(63)', 'game.money.gte(1)', 'game.shopBought[5] >= 3', 'game.base.gte(10)', 'game.base.gte(36)',
@@ -21,7 +23,8 @@
     'getOverclockPower().gt(1)', 'game.base.gte(62)', 'getOverclockPower().gte(1e10)', 'game.money.gte(1e100)', 'game.researchPoint.gte(1.11e11)',
     'game.quantumLab.gte(1)', 'game.qubit.gte(10)', 'game.quantumUpgradeBought.length>=8', 'game.quantumLab.gte(7)', 'game.qubit.gte(50)',
     'game.money.gte(\'1e1000\')', 'game.base.gte(250)', 'game.researchPoint.gte(D(2).pow(1024))', 'game.qubit.gte(1024)', 'game.quantumLab.gte(82)',
-    'game.t4resets.gte(1)', 'game.t4resets.gte(2)', 'calcChallengeDone() >= 1', 'calcQuantumLabGain().gte(20)', 'calcChallengeDone() >= 10'
+    'game.t4resets.gte(1)', 'game.t4resets.gte(2)', 'calcChallengeDone() >= 1', 'calcQuantumLabGain().gte(20)', 'calcChallengeDone() >= 10',
+    'game.t4resets.gte(100)', '0', '0', '0', 'game.money.gte("1e9000000000000")'
   ];
 })();
 
@@ -39,6 +42,8 @@ function initAchievements() {
     }
     var cNode = document.createElement('td');
     cNode.innerHTML = achievementName[i];
+    cNode.onmouseover = new Function(`achivenementHover.bind(this)(${i})`);
+    cNode.onmouseout = new Function(`achivenementUnhover()`);
     cNode.classList.add("achievementNode");
     trNode.appendChild(cNode);
   }
@@ -60,4 +65,14 @@ function calcAchievements() {
 }
 function renderAchievements() {
   [...document.getElementsByClassName("achievementNode")].forEach((ele, idx) => ele.style.filter = `grayscale(${!game.achievements.includes(idx)*1})`)
+}
+
+function achivenementHover(idx) {
+  $("#achDesc").style.opacity = 1;
+  $("#achDesc").innerHTML = new Function("return `" + achievementGoal[idx] + "`")();
+  $("#achDesc").style.top = (this.getBoundingClientRect().top - innerHeight/100) + 'px';
+  $("#achDesc").style.left = (this.getBoundingClientRect().left - $("#achDesc").offsetWidth/4) + 'px';
+}
+function achivenementUnhover() {
+  $("#achDesc").style.opacity = 0;
 }
