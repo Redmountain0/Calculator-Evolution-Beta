@@ -63,7 +63,7 @@ function calcRebootCooldown() {
   return 5000*((2/3)**game.researchLevel[7])/(game.quantumUpgradeBought.includes('44')?10:1)/singularityBoosts.SpeedBoost.toNumber();
 }
 function researchBuy(num) {
-  if (game.challengeEntered == 5 &&  3 <= num && num < 6) return;
+  if (game.challengeEntered == 5 &&  4 <= num && num < 6) return;
 
   if (game.quantumUpgradeBought.includes('42')) {
     researchMaxBuy(num);
