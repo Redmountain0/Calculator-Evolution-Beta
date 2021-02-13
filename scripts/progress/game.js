@@ -309,6 +309,7 @@ function resetGame() {
 function calcCpuUpgradeEffect() {
   var eff = D(2);
   if (game.quantumUpgradeBought.includes('11')) eff = eff.mul(1.1);
+  if (game.challengeEntered == 2) eff = eff.pow(0.75);
   return eff;
 }
 function calcCPU() {
@@ -321,7 +322,6 @@ function calcCPU() {
   if (game.quantumUpgradeBought.includes('14')) tempVar = tempVar.mul(D(9).pow(game.quantumLab));
   if (game.quantumUpgradeBought.includes('15')) tempVar = tempVar.mul(D(30).pow(D.max(0, calcMaxDigit().sub(game.digits))));
   if (game.quantumUpgradeBought.includes('16')) tempVar = tempVar.mul(game.researchPoint.add(1).pow(0.25));
-  if (game.challengeEntered == 2) tempVar = tempVar.pow(0.5);
   return tempVar;
 }
 function calcShopCost(idx, lv) {

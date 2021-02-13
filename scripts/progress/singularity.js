@@ -17,7 +17,7 @@
   challengeDesc = [
     "Base is capped at 50 (can extend with only grid)",
     "Digit is capped at 20 (can extend with only grid)",
-    "Sqrt CPU upgrade effect",
+    "CPU upgrade effect ^0.75",
     "All quantum upgrade cost x2",
     "Divied research upgrade effect by 20",
     "Lock Durability and Max durability research",
@@ -353,10 +353,10 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
       goal = D(2).mul(lv+1);
       break;
     case 3:
-      goal = D(10).mul((lv+1)**2);
+      goal = D(3).mul((lv/2+1)**2);
       break;
     case 4:
-      goal = D(2).add(lv**3);
+      goal = D(10).add(lv**3);
       break;
     case 5:
       goal = D(50).add(10*lv);
