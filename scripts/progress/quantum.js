@@ -7,8 +7,9 @@
       "Increase digit cap based on base (+${dNotation(game.base.pow(0.6).floor(), 4, 0)})",
       "'Bonus CPU Level' research's effect x2",
       "Each Quantum Lab Boosts CPU by x27 (x${dNotation(D(27).pow(game.quantumLab), 4, 0)})",
-      "Each Grey digit boosts CPU by x30 (x${dNotation(D(30).pow(D.max(0, calcMaxDigit().sub(game.digits))), 4, 0)})",
-      "RP boosts CPU (x${dNotation(game.researchPoint.add(1).pow(0.25), 4, 1)})<br>And sqrt Quantum Lab RP req"
+      "Each Grey digit boosts CPU by x30 (x${dNotation(D(30).pow(D.max(0, calcMaxDigit().sub(calcMaxDigit().lt(2000)?game.digits:0))), 4, 0)})<br><b style=\"opacity: 0.6\">If max base is bigger than 2000, this bonus will based on max Digit</b>",
+      "RP boosts CPU (x${dNotation(game.researchPoint.add(1).pow(0.25), 4, 1)})<br>And sqrt Quantum Lab RP req",
+      "Coming Soon!"
     ],
     // 2: Research
     [
@@ -17,16 +18,18 @@
       "Multiply research upgrade effect by x10 (x${!game.quantumUpgradeBought.includes('23') ? dNotation(calcPerResearchSpeedBase(), 4, 0) : dNotation(calcPerResearchSpeedBase().div(10), 4, 0)} -> x${!game.quantumUpgradeBought.includes('23') ? dNotation(calcPerResearchSpeedBase().mul(10), 4, 0) : dNotation(calcPerResearchSpeedBase(), 4, 0)})",
       "Boost Research speed based on Time spent on this quantum and RP (x${dNotation(D(2).pow(D(game.tLast-game.quantumTime).pow(0.2)).pow(D.min(10, D.max(1, game.researchPoint.log(10).div(20)))), 4, 2)})",
       "Remove money requirement from research",
-      "Research levels boosts RP gain (x${dNotation(game.researchLevel.reduce((a, b) => a.mul(b**2+1), D(1)).pow(3), 4, 1)})<br>And sqrt Quantum Lab Money req"
+      "Research levels boosts RP gain (x${dNotation(game.researchLevel.reduce((a, b) => a.mul(b**2+1), D(1)).pow(3), 4, 1)})<br>And sqrt Quantum Lab Money req",
+      "Coming Soon!"
     ],
     // 3: Quantum
     [
       "Qubit production speed x100",
-      "Pow Quantum requirements based on Base (^${dNotation(D(0.999).pow(D.min(calcQuantum2Cap(), game.base)), 4, 5)})",
+      "The Quantum requirements based on Base (^${dNotation(D(0.999).pow(D.min(calcQuantum2Cap(), game.base)), 4, 5)})",
       "Each Qubit boosts itself Production Speed by x1.3 (x${dNotation(D(1.3).pow(game.qubit), 4, 2)})",
       "Boost Qubit production speed based on Number (x${dNotation(D.min(game.number.add(1).log(10).div(10).sqrt(2), 1).add(1).pow(game.number.add(1).log(10).pow(0.6)), 4, 2)})",
       "Each bought Quantum Upgrade boosts Qubit gain by x10 (x${dNotation(D(10).pow([...new Set(game.quantumUpgradeBought)].length), 0)})",
-      "You can bulk buy Quantum Labs<br>And extend the cap of Quantum II (${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap(), 4, 0) : dNotation(calcQuantum2Cap().div(5), 0, 1)} -> ${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap().mul(5), 0, 1) : dNotation(calcQuantum2Cap(), 0, 1)})"
+      "You can bulk buy Quantum Labs<br>And extend the cap of Quantum II (${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap(), 4, 0) : dNotation(calcQuantum2Cap().div(5), 0, 1)} -> ${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap().mul(5), 0, 1) : dNotation(calcQuantum2Cap(), 0, 1)})",
+      "Coming Soon!"
     ],
     // 4: QoL
     [
@@ -35,16 +38,18 @@
       "Generate RP per second based on Reboot cooldown (${dNotation(Math.floor(30*(1/calcRebootCooldown())*1000), 2, 0)}%)",
       "Reboot cooldown /10",
       "<b>\"Base_Increaser.exe\"</b> will land you to <b>\"Maximum Base\"</b><br><b>\"Memory.exe\"</b> will land you to <b>\"Digits based on Number/s\"</b>",
-      "Instant finish Qubit make if pending time is less than 7 mins"
+      "Instant finish Qubit make if pending time is less than 7 mins",
+      "Process exceed won't block anything"
     ],
     // 5: Automate
     [
-      "Automate Program buy<br><b style=\"opacity: 0.6\">You can click again Automates after buy to toggle!</b>",
+      "Automate Program buy<br><b style=\"opacity: 0.6\">You can click Automate upgrades again to toggle them!</b>",
       "Automate Reboot",
       "Automate research buy first row",
       "Automate research buy second row",
       "Automate research buy third row",
-      "Automate Quantum Lab"
+      "Automate Quantum Lab",
+      "Coming Soon!"
     ],
     // 6: Keep
     [
@@ -53,26 +58,43 @@
       "Keep RP",
       "Keep bought Programs (All)",
       "Data_Holder.exe will keep through Quantum",
-      "Keep all research"
+      "Keep all research",
+      "Above upgrades will keep through Singularity<br><b style=\"opacity: 0.6\">exclude challenge enter</b>"
+    ],
+    // 7: Singularity
+    [
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!"
     ]
   ];
-  quantumUpgradeNames = ["Base", "Research", "Quantum", "QoL", "Automate", "Keep"];
+  quantumUpgradeNames = ["Base", "Research", "Quantum", "QoL", "Automate", "Keep", "Singularity"];
   quantumUpgradeRespecConfrim = 10;
   quantumUpgradeRestartConfrim = 10;
+  qUpgradeData = {
+    count: 49, col: 7, row: 7,
+    row123cost: [2, 8, 18, 32, 48, 155, 3123],
+    row4cost: [1, 5, 11, 20, 30, 97, 400],
+    row5cost: [1, 4, 10, 17, 26, 86, 220],
+    row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
+    row7cost: [160, 320, 640, 1280, 2560, 5120, 10240]
+  };
 
-  (function(){
-    // upgrade init
-    for (var i = 0; i < 36; i++) {
-      var upNode = document.createElement("span");
-      upNode.classList.add('quantumUpgrade');
-      upNode.style.setProperty("--col", hsvToRgb(Math.floor(i%6)/12, 0.5+i/150, 0.5+i/300));
-      upNode.style.setProperty("--col2", hsvToRgb(Math.floor(i%6)/12, 0.5+i/150-0.3, 0.5+i/300-0.3));
-      upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
-      upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
-      upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
-      $('#quantumUpgrades').append(upNode);
-    }
-  })();
+  // upgrade node init
+  for (var i = 0; i < qUpgradeData.count; i++) {
+    var upNode = document.createElement("span");
+    upNode.classList.add('quantumUpgrade');
+    upNode.style.setProperty("--col", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150, 0.5+i/300));
+    upNode.style.setProperty("--col2", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150-0.3, 0.5+i/300-0.3));
+    upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
+    upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
+    upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
+    $('#quantumUpgrades').append(upNode);
+  }
 })();
 
 function quantum() {
@@ -89,17 +111,31 @@ function quantum() {
   quantumReset();
 }
 function renderQunatum() {
+  
   $("#quantumButton").className = calcQuantumLabGain().gte(1) ? "" : "disabled";
+  $("#quantumUpgrades").style.setProperty("--n", game.achievements.includes(30) ? 7 : 6);
   var afterQuantumLab = (game.quantumUpgradeBought.includes('36') ? D.max(game.quantumLab, game.quantumLab.add(calcQuantumLabGain().floor(0))) : game.quantumLab);
   $("#quantumLabCost").innerHTML = `Next Lab: ${dNotation(D(1e100).mul(D(10).pow(D(5).mul(afterQuantumLab.mul(afterQuantumLab.sub(1)).add(game.quantumLab)))).pow(getQuantumReqPow()[0]), 2)}$, ${dNotation(D(1e11).mul(D(10).pow(D(1/2).mul(game.quantumLab.mul(game.quantumLab.sub(1)).add(game.quantumLab)))).pow(getQuantumReqPow()[1]), 2)} RP`;
   $("#quantumLabQuantity").innerHTML = (calcQuantumLabGain().floor(0).lte(1)?'a':dNotation(calcQuantumLabGain().floor(0)));
   $("#quantumDesc").innerHTML = `You have ${game.quantumLab} Quantum Lab which makes Qubit Prodution ${dNotation(calcQubitSpeed(), 4, 0)}x faster<br>Each Qubit makes your CPU 2x faster (x${dNotation(calcQubitEffect(), 4, 0)})`;
   $("#qubitDisplay").innerHTML = `You have ${game.qubit.sub(calcUsedQubit())}/${game.qubit} Qubit (next Qubit in ${timeNotation(D(3).pow(game.qubit.sub(calcChallengeDone()).add(1)).sub(game.qubitProgress).div(calcQubitSpeed()))})`;
-  for (var i = 0; i < 36; i++) document.getElementsByClassName("quantumUpgrade")[i].classList[(game.quantumUpgradeBought.includes((i%6+1) + '' + (Math.floor(i/6)+1)) ? 'add' : 'remove')]("bought");
-  for (var i = 0; i < 6; i++) document.getElementsByClassName("quantumUpgrade")[4+i*6].classList[(game.quantumUpgradeBought.includes(((4+i*6)%6+1) + '' + Math.floor((4+i*6)/6+1)) && !game.quantumAutomateToggle[i] ? 'add' : 'remove')]("deactivated");
+  
+  var qUpgradeNodes = document.getElementsByClassName("quantumUpgrade");
+  // fill bought upgrades
+  for (var i = 0; i < qUpgradeData.count; i++) qUpgradeNodes[i].classList[(game.quantumUpgradeBought.includes((i%qUpgradeData.col+1) + '' + (Math.floor(i/qUpgradeData.row)+1)) ? 'add' : 'remove')]("bought");
+  // automate toggle opacity
+  for (var i = 0; i < qUpgradeData.row; i++) qUpgradeNodes[4+i*qUpgradeData.col].classList[(game.quantumUpgradeBought.includes(((4+i*qUpgradeData.col)%qUpgradeData.col+1) + '' + Math.floor((4+i*qUpgradeData.col)/qUpgradeData.row+1)) && !game.quantumAutomateToggle[i] ? 'add' : 'remove')]("deactivated");
+  // hide '7x' and 'x7' upgrades if locked
+  if (game.achievements.includes(30)) {
+    for (var i = 0; i < qUpgradeData.row; i++) qUpgradeNodes[6+i*qUpgradeData.col].style.display = "inline-block";
+    for (var i = 0; i < qUpgradeData.col-1; i++) qUpgradeNodes[qUpgradeData.count-qUpgradeData.row+i].style.display = "inline-block";
+  } else {
+    for (var i = 0; i < qUpgradeData.row; i++) qUpgradeNodes[6+i*qUpgradeData.col].style.display = "none";
+    for (var i = 0; i < qUpgradeData.col-1; i++) qUpgradeNodes[qUpgradeData.count-qUpgradeData.row+i].style.display = "none";
+  }
 }
 function calcQuantum() {
-  if (game.quantumUpgradeBought.includes('46') && D(3).pow(game.qubit.add(1)).sub(game.qubitProgress).div(calcQubitSpeed()).lte(60*7)) game.qubitProgress = D(3).pow(game.qubitProgress.add(1).log(3).ceil(0));
+  if (game.quantumUpgradeBought.includes('46') && D(3).pow(game.qubit.sub(calcChallengeDone()).add(1)).sub(game.qubitProgress).div(calcQubitSpeed()).lte(60*7)) game.qubitProgress = D(3).pow(game.qubitProgress.add(1).log(3).ceil(0));
   game.qubitProgress = game.qubitProgress.add(calcQubitSpeed().mul(calcRealTgain()));
   game.qubit = D.max(0, game.qubitProgress.add(1).log(3)).floor(0).add(calcChallengeDone());
   calcQuantumAuto();
@@ -115,7 +151,7 @@ function calcQuantumAuto() {
 
 function displayQuantumUpgradeDesc(idx) {
   var tempCols = [getComputedStyle(this).getPropertyValue("--col"), getComputedStyle(this).getPropertyValue("--col2")];
-  var fixedIdx = [Math.floor(idx/6), idx%6]
+  var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col]
   $("#quantumUpgradeDesc").innerHTML = `
     <p style="color: ${tempCols[1]}; text-shadow: 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}, 0 0 0.5vh ${tempCols[0]}; font-size: 2vh;">
       ${quantumUpgradeNames[fixedIdx[1]]} ${romanize(fixedIdx[0]+1).toUpperCase()}
@@ -134,7 +170,7 @@ function hideQuantumUpgradeDesc() {
 }
 function buyQuantumUpgrade(idx) {
   setTimeout( function() {
-    var fixedIdx = [Math.floor(idx/6), idx%6];
+    var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
     ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1)) ) {
       // buy
       game.quantumUpgradeBought.push((fixedIdx[1]+1) + '' + (fixedIdx[0]+1));
@@ -146,12 +182,29 @@ function buyQuantumUpgrade(idx) {
       if (!game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) break ifStat;
       game.quantumAutomateToggle[fixedIdx[0]] ^= 1;
     }
-  }, 0);
+  }, 0); // timeout to prevent multi buy
 }
 function getQuantumUpgradeCost(idx) {
-  var fixedIdx = [Math.floor(idx/6), idx%6];
-  var tempCost = Math.floor((Math.floor((fixedIdx[0]*2)**1.7+2)*Math.floor(fixedIdx[1]==5?fixedIdx[1]**1.2+5:1)+fixedIdx[0]*3)**(fixedIdx[0]==5&&fixedIdx[1]!=5?1.2:1)/(fixedIdx[1]==3||fixedIdx[1]==4?fixedIdx[1]/5+1:1));
+  var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
+  switch (fixedIdx[1]) {
+    case 0: case 1: case 2:
+      tempCost = qUpgradeData.row123cost[fixedIdx[0]];
+      break; 
+    case 3:
+      tempCost = qUpgradeData.row4cost[fixedIdx[0]];
+      break;
+    case 4:
+      tempCost = qUpgradeData.row5cost[fixedIdx[0]];
+      break;
+    case 5:
+      tempCost = qUpgradeData.row6cost[fixedIdx[0]];
+      break;
+    case 6:
+      tempCost = qUpgradeData.row7cost[fixedIdx[0]];
+      break;
+  }
   if (game.challengeEntered == 3) tempCost *= 2;
+  if (fixedIdx[1] == 5 && fixedIdx[0] < calcMilestoneDone()) tempCost = 0;
   return tempCost;
 }
 function quantumUpgradeRespec() {
@@ -159,12 +212,13 @@ function quantumUpgradeRespec() {
   if (quantumUpgradeRespecConfrim > calcQuantumResetClicks()) quantumUpgradeRespecConfrim = calcQuantumResetClicks();
   quantumUpgradeRespecConfrim--;
   $("#quantumRespec").innerHTML = `${quantumUpgradeRespecConfrim} more clicks!`;
-  if (quantumUpgradeRespecConfrim == 0) {
+  if (quantumUpgradeRespecConfrim <= 0) {
     quantumUpgradeRespecConfrim = calcQuantumResetClicks();
     $("#quantumRespec").innerHTML = `Respec <span style="opacity: var(--tempOp); display: var(--tempDis)">& Quantum Reset<span>`;
     clearTimeout(qRespecTimeout);
     commandAppend("respec quantumUpgrades", 161);
     game.quantumUpgradeBought = [];
+    dokeepMilestone();
     quantumReset();
   }
   qRespecTimeout = setTimeout( function () {
@@ -177,7 +231,7 @@ function quantumRestart() {
   if (quantumUpgradeRestartConfrim > calcQuantumResetClicks()) quantumUpgradeRestartConfrim = calcQuantumResetClicks();
   quantumUpgradeRestartConfrim--;
   $("#quantumRestart").innerHTML = `${quantumUpgradeRestartConfrim} more clicks!`;
-  if (quantumUpgradeRestartConfrim == 0) {
+  if (quantumUpgradeRestartConfrim <= 0) {
     quantumUpgradeRestartConfrim = calcQuantumResetClicks();
     $("#quantumRestart").innerHTML = `Restart <span style="opacity: var(--tempOp); display: var(--tempDis)">Quantum Run<span>`;
     clearTimeout(qRestartTimeout);
@@ -190,7 +244,7 @@ function quantumRestart() {
   }, 3000);
 }
 function calcQuantumResetClicks() {
-  return 10-game.t4resets.toNumber();
+  return Math.max(2, 10-game.t4resets.toNumber());
 }
 
 function getMaxQuantumLabGain() {
@@ -202,7 +256,8 @@ function calcQuantum2Cap() {
   return baseCap;
 }
 function getQuantumReqPow() {
-  var totPow = game.quantumUpgradeBought.includes('32') ? D(0.999).pow(D.min(calcQuantum2Cap(), game.base)) : 1;
+  var totPow = game.quantumUpgradeBought.includes('32') ? D(0.999).pow(D.min(calcQuantum2Cap(), game.base)) : D(1);
+  if (game.achievements.includes(28)) totPow = totPow.mul(0.9);
 
   var moneyPow = D(totPow);
   if (game.quantumUpgradeBought.includes('26')) moneyPow = moneyPow.div(2);
@@ -230,21 +285,27 @@ function calcQuantumLabGain() {
 
   return labGain.floor(0);
 }
+function dokeepMilestone() {
+  for (let i = 0, l = calcMilestoneDone(); i < l; i++) game.quantumUpgradeBought.push('6' + (i+1));
+}
 
 function calcQubitSpeed() {
-  var tempSpd = game.quantumLab.pow(game.quantumLab.sqrt(2)).mul(D(10).add(game.quantumLab.pow(2)).pow(game.quantumLab.sub(1))).sub(0.1);
+  var tempLab = game.quantumLab.add(game.achievements.includes(24)?2:0);
+  var tempSpd = tempLab.pow(tempLab.pow(0.5)).mul(D(10).add(tempLab.pow(2)).pow(tempLab.sub(1))).sub(0.1);
+  if (game.achievements.includes(18)) tempSpd = tempSpd.mul(3);
+  if (game.achievements.includes(19)) tempSpd = tempSpd.mul(1.5);
   if (game.quantumUpgradeBought.includes('31')) tempSpd = tempSpd.mul(100);
   if (game.quantumUpgradeBought.includes('33')) tempSpd = tempSpd.mul(D(1.3).pow(game.qubit));
   if (game.quantumUpgradeBought.includes('34')) tempSpd = tempSpd.mul(D.min(D.max(game.number, 0).add(1).log(10).div(10).pow(0.5), 1).add(1).pow(D.max(game.number, 0).add(1).log(10).pow(0.6)));
   if (game.quantumUpgradeBought.includes('35')) tempSpd = tempSpd.mul(D(10).pow([...new Set(game.quantumUpgradeBought)].length));
-  tempSpd = tempSpd.mul(27); // boost
+  tempSpd = tempSpd.mul(8); // boost
   tempSpd = tempSpd.mul(singularityBoosts.QubitBoost);
   return tempSpd;
 }
 function calcUsedQubit() {
   var tempUsed = D(0);
   for (var i = 0; i < 36; i++) {
-    var fixedIdx = [Math.floor(i/6), i%6];
+    var fixedIdx = [Math.floor(i/qUpgradeData.row), i%qUpgradeData.col];
     if (game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) {
       tempUsed = tempUsed.add(getQuantumUpgradeCost(i));
     }

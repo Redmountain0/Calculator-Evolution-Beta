@@ -96,12 +96,20 @@
   tps = [];
   tpsRecording = 0;
   lastTpsRecord = new Date().getTime();
+
+  bugfixerConfirm = 1;
+
+  for (let i = 0; i < 7; i++) {
+    var programStatusNode = document.createElement("span");
+    programStatusNode.classList.add("programStatusNode");
+    $("#programStatusArea").append(programStatusNode);
+  }
 })();
 
 function renderBasic() {
   $("#basedNumber").innerHTML = formatWithBase(game.number, game.base, game.digits, 1, 80);
   $("#money").innerHTML = dNotation(game.money, 5);
-  tempRes = '';
+  tempRes = ` <span style="filter: grayscale(${!game.programActive[1]*1})">(+${dNotation(calcMoneyGain(), 2, 2).padEnd(7, 'B').replace(/B/g, "&nbsp;")}$/s)</span>`;
   if (game.t2toggle) tempRes += ` | ${dNotation(game.researchPoint, 4, 0)} RP\n`;
   if (game.t3toggle) tempRes += ` | ${dNotation(game.qubit, 4, 0)} Qubit , ${dNotation(game.quantumLab, 4, 0)} Lab\n`;
   if (game.t4toggle) tempRes += ` | ${dNotation(game.singularityPower, 4, 0)} SP\n`;
@@ -109,12 +117,17 @@ function renderBasic() {
   $("#memoryDigit").innerHTML = ("").padStart(Math.min(100, dNum(game.mDigits)-dNum(game.digits)), 0);
   $("#numberBase").innerHTML = game.base;
 
-  //tabs
+  // tabs
   $('#mainNav > .tabNav:nth-child(7)').style.display = (game.t3toggle ? 'inline-block' : 'none');
   $('#mainNav > .tabNav:nth-child(7)').classList[calcQuantumLabGain().gte(1)?"add":"remove"]("available")
   $('#mainNav > .tabNav:nth-child(8)').style.display = (game.t4toggle ? 'inline-block' : 'none');
 
   commandFloat();
+
+  // programStatusArea
+  $("#programStatusArea").style.display = game.t3toggle ? "block" : "none";
+  [...document.getElementsByClassName("programStatusNode")].forEach((ele, idx) => {ele.classList[game.programActive[idx]?"add":"remove"]("activated")});
+
 }
 function renderModule() {
   $("#processes").innerHTML = `Process ${calcProcessActive()}/${calcMultiProcess()}`;
@@ -135,7 +148,7 @@ function renderModule() {
   $(".program:nth-of-type(4)").style.display = ((game.shopBought[0]) ? "block" : "none");
   $(".program:nth-of-type(5)").style.display = ((game.shopBought[2]) ? "block" : "none");
   $(".program:nth-of-type(6)").style.display = ((game.shopBought[3]) ? "block" : "none");
-  $(".program:nth-of-type(7)").style.display = ((game.researchLevel[0]>=1) ? "block" : "none");
+  $(".program:nth-of-type(7)").style.display = ((game.researchLevel[1]>=1) ? "block" : "none");
 
   // grid
   renderGrid();
@@ -161,7 +174,10 @@ function renderOption() {
   }
 }
 function renderBasicInfo() {
-  $('#basicInfo').innerHTML = `Number: ${dNotation(game.number, 2, 0)} / ${dNotation(game.base.pow(game.digits), 2, 0)}<br>Digit: ${dNotation(game.digits, 2, 0)} / ${dNotation(calcMaxDigit(), 2, 0)}<br>Base: ${dNotation(game.base, 2, 0)} / ${dNotation(Math.max(game.base, calcMaxBase()), 2, 0)}`;
+  $('#basicInfo').innerHTML = `Number: ${dNotation(game.number, 2, 0)} / ${dNotation(game.base.pow(game.digits), 2, 0)}`;
+  $('#basicInfo').innerHTML += `<br>Digit: ${dNotation(game.digits, 2, 0)} / ${dNotation(calcMaxDigit(), 2, 0)} ${!singularityBoosts.DigitBoost.eq(0)?`(+${dNotation(singularityBoosts.DigitBoost.floor(0), 2, 0)})`:""}`;
+  $('#basicInfo').innerHTML += `<br>Base: ${dNotation(game.base, 2, 0)} / ${dNotation(Math.max(game.base, calcMaxBase()), 2, 0)} ${!singularityBoosts.BaseBoost.eq(0)?`(+${dNotation(singularityBoosts.BaseBoost.floor(0), 2, 0)})`:""}`
+
 }
 function renderStat() {
   $("#statsText").innerHTML = `You've played this game for ${timeNotation((new Date().getTime()-game.startTime)/1000)}`;
@@ -227,7 +243,7 @@ function activeProgram(num) {
   if (num == 3 && !game.shopBought[0]) return;
   if (num == 4 && !game.shopBought[2]) return;
   if (num == 5 && !game.shopBought[3]) return;
-  if (num == 6 && (game.programActive[6] || game.researchLevel[0]<1)) return;
+  if (num == 6 && (game.programActive[6] || game.researchLevel[1]<1)) return;
   var programCount = calcProcessActive();
   if (game.programActive[num]) {
     programCount--;
@@ -320,8 +336,9 @@ function calcCPU() {
   )).mul(getOverclockPower());
   tempVar = tempVar.mul(calcQubitEffect());
   if (game.quantumUpgradeBought.includes('14')) tempVar = tempVar.mul(D(9).pow(game.quantumLab));
-  if (game.quantumUpgradeBought.includes('15')) tempVar = tempVar.mul(D(30).pow(D.max(0, calcMaxDigit().sub(game.digits))));
+  if (game.quantumUpgradeBought.includes('15')) tempVar = tempVar.mul(D(30).pow(D.max(0, calcMaxDigit().sub(calcMaxDigit().lt(2000)?game.digits:0))));
   if (game.quantumUpgradeBought.includes('16')) tempVar = tempVar.mul(game.researchPoint.add(1).pow(0.25));
+  if (game.achievements.includes(25)) tempVar = tempVar.mul(25);
   return tempVar;
 }
 function calcShopCost(idx, lv) {
@@ -337,6 +354,8 @@ function calcShopCost(idx, lv) {
     default:
 
   }
+  if (game.achievements.includes(4)) cost = cost.mul(0.95);
+  if (game.achievements.includes(21)) cost = cost.div(10);
   return cost;
 }
 function calcShopMax() {
@@ -363,7 +382,11 @@ function calcMaxBase() {
   return tempNum.floor(0);
 }
 function calcMoneyGain() {
-  moneyGain = D.max(0, calcCPU().mul(calcRealTgain()/3e4).mul(game.number));
+  moneyGain = D.max(0, calcCPU().mul(game.number)).div(3e4);
+  if (game.achievements.includes(1)) moneyGain = moneyGain.mul(1.25);
+  if (game.achievements.includes(13)) moneyGain = moneyGain.mul(5);
+  if (game.achievements.includes(13)) moneyGain = moneyGain.mul(10);
+  if (game.achievements.includes(20)) moneyGain = moneyGain.mul(10);
   if (game.shopBought[1] >= 1) moneyGain = moneyGain.mul(game.digits);
   if (game.shopBought[1] >= 2) moneyGain = moneyGain.mul(game.researchPoint.add(1));
   if (game.shopBought[1] >= 3) moneyGain = moneyGain.mul(getOverclockPower());
@@ -381,9 +404,8 @@ function getBaseIncreaseReq() {
   ).sub(1);
 }
 function calcProgram() {
-  if (rebooting || isProcessExceed()) {
-    return;
-  }
+  if (isProcessExceed()) game.programActive = [...new Array(15).fill(0)];
+  if (rebooting) return;
   if (game.programActive[0]) {
     game.number = D.min(game.number.plus(calcCPU().mul(calcRealTgain())), game.base.pow(game.digits).sub(1));
     game.rebootNum = D.max(game.number, game.rebootNum);
@@ -392,7 +414,7 @@ function calcProgram() {
     delRainbowEffect("#basedNumber");
   }
   if (game.programActive[1]) {
-    game.money = game.money.plus(calcMoneyGain());
+    game.money = game.money.plus(calcMoneyGain().mul(calcRealTgain()));
     rainbowEffect("#money");
   } else {
     delRainbowEffect("#money");
@@ -456,8 +478,12 @@ function calcProcessActive() {
 }
 function calcMultiProcess() {
   var maxProcess = game.researchLevel[1]+1;
-  maxProcess += Math.floor(Math.min(25/4, game.singularityPower.valueOf())*4);
+  maxProcess += Math.floor(Math.min(25, game.singularityPower.toNumber()*4)+Math.max(0, game.singularityPower.toNumber()*4-25)**0.5);
+  if (game.achievements.includes(7)) maxProcess += 1;
+  if (game.achievements.includes(34)) maxProcess += 10;
+
   if (game.challengeEntered == 7) maxProcess = Math.floor(maxProcess/10);
+
   return maxProcess;
 }
 function calcProcessLeft() {
@@ -472,6 +498,17 @@ function bugFixer() {
 }
 function bugFixerNaN() {
   if (game.qubit.isNaN()) {
-
+    if (bugfixerConfirm && confirm("NaN bug detected!\nConfirm will reset your money, number, qubit, RP, research progress\n* You will see this prompt for every refresh")) {
+      bugfixerConfirm = 0;
+      return;
+    }
+    game.money = D(0);
+    game.number = D(0);
+    game.qubit = D(0);
+    game.qubitProgress = D(0);
+    game.rebootNum = D(0);
+    game.researchPoint = D(0);
+    game.researchProgress = new Array(9).fill(0);
+    commandAppend("run Bug_Fixer.exe");
   }
 }

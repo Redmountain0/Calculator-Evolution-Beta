@@ -9,23 +9,28 @@ function dNotation(infNum, dim=0, preDim=dim) {
     return infNum.toFixed(Math.max(0, preDim-infNum.toFixed(0).length+1));
   }
 }
-function formatWithBase(infNum, base=2, len=D(1e300), padStart=0, maxLength=Infinity) {
+function formatWithBase(infNum, base=2, len=D(1e300), padStart=0, maxLength=Infinity, hy=game.hyperMode&&game.optionToggle[0]) {
   // ty Yahtzee Master#0168 to make this function for me :D
-  base = D(base);
-  infNum = D(infNum);
+  var base = D(base);
+  var infNum = D(infNum);
   if (infNum.eq(0)) return ("0").repeat(padStart?Number(len.valueOf()):1);
   let outputString = "";
   const logThing = Math.floor(infNum.log(base));
   if (infNum.gte(base.pow(len).sub(1))) return String.fromCharCode(getModifiedCharcode(base.sub(1).valueOf())).repeat(Math.min(maxLength, len.valueOf()));
   for (let index = 0; index <= Math.min(maxLength, logThing); index++) {
-    var strIdx = Number(infNum.div(base.pow(logThing-index)).mod(base).floor());
+    var tempCharcode = infNum.div(base.pow(logThing-index)).mod(base).floor();
+    var strIdx = +tempCharcode;
     infNum = infNum.sub(base.pow(logThing-index).mul(strIdx));
-    outputString += String.fromCharCode(getModifiedCharcode(strIdx));
+    outputString += (hy?`<span style="opacity: ${0.3+(tempCharcode+1)/base.toNumber()*0.7};">`:"") + String.fromCharCode(getModifiedCharcode(strIdx)) + (hy?"</span>":"");
   }
-  if (padStart && outputString.length <= maxLength) {
-    outputString = outputString.padStart(Number(len.valueOf()), '0');
+  if (padStart && hy) {
+    var needToPush = +(len.valueOf()) - outputString.replace(/(<[^<>]+>)/g, '').length;
+    console.log(needToPush);
+    outputString = `<span style="opacity: 0.3">${'0'.repeat(Math.max(0, needToPush))}</span>` + outputString;
+  } else if (padStart && outputString.length <= maxLength) {
+    outputString = outputString.padStart(+(len.valueOf()), '0');
   }
-  if (outputString.length > maxLength) {
+  if (outputString.replace(/(<[^<>]+>)/g, '').length > maxLength) {
     outputString += "...";
   }
   return outputString;

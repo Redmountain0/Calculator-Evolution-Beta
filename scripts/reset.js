@@ -18,6 +18,7 @@ function quantumReset() {
   if (!game.quantumUpgradeBought.includes('65')) game.programActive[4] = false;
   rebootReset();
   if (!game.quantumUpgradeBought.includes('63')) game.researchPoint = D(0);
+  if (game.achievements.includes(22)) game.researchPoint = game.researchPoint.add(100);
   for (var i = 0; i < 9; i++) {
     game.researchProgress[i] = 0;
     if (!game.quantumUpgradeBought.includes('66')) game.researchLevel[i] = (game.quantumUpgradeBought.includes('62') ? Math.min(3, game.researchLevel[i]) : 0);
@@ -47,4 +48,5 @@ function singularityReset() {
   game.singularityTime = new Date().getTime();
   singularityMachineChanged();
   game.t3resets = D(0);
+  dokeepMilestone();
 }

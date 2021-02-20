@@ -1,5 +1,5 @@
 (function(){
-  savePoint = 'CalculatorEvolutionBeta';
+  savePoint = 'CalculatorEvolution2';
 })();
 
 tempGame = {
@@ -22,8 +22,10 @@ tempGame = {
   researchProgress: new Array(9).fill(0),
   rebootTime: new Date().getTime(),
   t2toggle: 0,
+  t2time: 0,
   t2resets: D(0),
   optionToggle: new Array(9).fill(1),
+  hyperMode: false,
   achievements: [],
   durability: D(1),
   t3toggle: 0,
@@ -37,6 +39,7 @@ tempGame = {
   quantumTime: new Date().getTime(),
   t4toggle: 0,
   t4resets: D(0),
+  t4resetTime: 1e110,
   singularityTime: new Date().getTime(),
   singularityGrid: {},
   singularityGridActivate: 0,

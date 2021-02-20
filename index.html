@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animation.css?ver=1.0.b31">
-    <link rel="stylesheet" href="index.css?ver=1.0.b31">
+    <link rel="stylesheet" href="animation.css?ver=1.1.b1">
+    <link rel="stylesheet" href="index.css?ver=1.1.b1">
     <script src="./scripts/decimalMin.js"></script>
-    <script src="./scripts/index.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/numberFunc.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/achievement.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/progress/game.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/progress/reboot.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/progress/quantum.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/progress/singularity.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/saveload.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/loop.js?ver=1.0.b31" defer></script>
-    <script src="./scripts/reset.js?ver=1.0.b31" defer></script>
-    <title>Calculator Evolution v1.0.b31</title>
+    <script src="./scripts/index.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/numberFunc.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/achievement.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/progress/game.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/progress/reboot.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/progress/quantum.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/progress/singularity.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/saveload.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/loop.js?ver=1.1.b1" defer></script>
+    <script src="./scripts/reset.js?ver=1.1.b1" defer></script>
+    <title>Calculator Evolution v1.1.b1</title>
   </head>
   <body>
     <div id="warpAll">
@@ -106,7 +106,7 @@
                 Mine_2.0.exe
               </div>
               <div class="itemCost">
-                Cost: <span class="itemCostNum">1.000e6$</span>
+                Cost: <span class="itemCostNum">1.1.b100e6$</span>
               </div>
               <div class="itemDesc">
                 Multiply mine power by digits
@@ -324,7 +324,7 @@
                 Cost: <span>1</span> RP<span class="researchMoneyReq">, <span>0</span> $</span>
               </div>
               <div class="researchDesc">
-                Durability decrease speed /1.1
+                Durability decrease speed /1.1.b1
               </div>
             </div>
             <div class="research" onclick="researchBuy(5)">
@@ -371,7 +371,7 @@
             </div>
             <div class="research" onclick="researchBuy(7)">
               <div class="researchName">
-                Reboot Cool Down
+                Reboot Cooldown
               </div>
               <div class="researchProgress">
                 <span class="researchLevel">Lv.0</span>
@@ -428,6 +428,17 @@
           <a class="optionBtn" style="text-decoration: none;" href="https://discord.gg/wkdVQxT" target="_blank">
             My Discord
           </a>
+          <div class="normalText" style="margin-top: 1vh; font-size: 1.3vh;">
+            Hotkeys<br>
+            -----------<br>
+            1 ~ 7: Toggle program 1~7<br>
+            8: Toggle all programs<br>
+            Shift + 1 ~ 8: Buy research 1 ~ 8<br>
+            A, S, D, F, G, H, J: Open tabs<br>
+            R: reboot<br>
+            Q: build lab<br><br>
+            Shift + H: Toggle Hyper mode! - More fancy effects, more lag!
+          </div>
         </div>
         <!-- Quantum -->
         <div class="tab" style="display:none;">
@@ -451,7 +462,8 @@
             <div id="quantumRespec" onclick="quantumUpgradeRespec()">
               Respec <span style="opacity: var(--tempOp); display: var(--tempDis)">& Quantum Reset<span>
             </div>
-            <div id="quantumRestart" onclick="quantumRestart()">
+            <div id="quantumRestart" onclick="quantumRestart()" style="display: none;">
+              <!-- rip, Reset Quantum run button -->
               Restart <span style="opacity: var(--tempOp); display: var(--tempDis)">Quantum Run<span>
             </div>
           </div>
@@ -482,7 +494,7 @@
               <div id="gridReq">
                 Complete 4 more challenges to unlock 5th Grid space
               </div>
-              <div id="challengeReq">
+              <div id="milestoneReq" style="display: none;">
                 Go singularity 0/2 times to enter Challenge (Increases per challenge complete)
               </div>
               <div id="challengeDesc">
@@ -499,6 +511,9 @@
         </div>
       </div>
       <div id="commandArea">
+
+      </div>
+      <div id="programStatusArea">
 
       </div>
       <div id="infoArea">
