@@ -173,6 +173,7 @@ function calcSingularity() {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
   for (var i in game.singularityGrid) game.singularityGrid[i].update();
   for (var i in margerWorks) margerWorks[i] = [...new Set(margerWorks[i])];
+  if (game.quantumUpgradeBought.includes('67')) game.singularityPower = game.singularityPower.add(calcSingularityPowerGain().mul(tGain/10));
   if (game.challengeEntered != -1) {
     if (game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
       if (game.wormholeChallengeProgress[game.challengeEntered] < 10) {
