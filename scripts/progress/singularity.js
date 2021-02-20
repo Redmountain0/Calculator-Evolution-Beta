@@ -419,7 +419,7 @@ class SingularityMachine {
   }
 
   update () {
-    if (isProcessExceed()) return 0;
+    if (isProcessExceed() && !game.quantumUpgradeBought.includes('47')) return 0;
     var power = this.getPower();
     if (typeof this.getPointedMachine() == "undefined") return 0;
     switch (this.type) {

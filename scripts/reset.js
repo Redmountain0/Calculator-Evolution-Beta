@@ -39,8 +39,9 @@ function quantumReset() {
   game.quantumTime = new Date().getTime();
   game.t2resets = D(0);
 }
+
 function singularityReset() {
-  game.quantumUpgradeBought = [];
+  if (!game.quantumUpgradeBought.includes('67')) game.quantumUpgradeBought = [];
   quantumReset();
   game.qubit = D(0);
   game.qubitProgress = D(0);

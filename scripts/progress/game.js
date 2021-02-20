@@ -404,7 +404,7 @@ function getBaseIncreaseReq() {
   ).sub(1);
 }
 function calcProgram() {
-  if (isProcessExceed()) game.programActive = [...new Array(15).fill(0)];
+  if (isProcessExceed() && !game.quantumUpgradeBought.includes('47')) game.programActive = [...new Array(15).fill(0)];
   if (rebooting) return;
   if (game.programActive[0]) {
     game.number = D.min(game.number.plus(calcCPU().mul(calcRealTgain())), game.base.pow(game.digits).sub(1));

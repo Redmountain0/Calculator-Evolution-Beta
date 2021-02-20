@@ -283,7 +283,7 @@ body {
   position: absolute; top: calc(var(--s) * 0.07); left: calc(var(--s) * 0.07);
   padding: calc(var(--s) * 0.02);
   border: solid var(--cCol);
-  filter: brightness(2.6);
+  filter: brightness(2.6) drop-shadow(0 0 calc(var(--s) * 0.05) var(--cCol));
   border-width: 0 calc(var(--s) * 0.02) calc(var(--s) * 0.02) 0;
   display: inline-block;
   transform: rotate(calc(45deg + 90deg * var(--arrowState))) scale(0.5);

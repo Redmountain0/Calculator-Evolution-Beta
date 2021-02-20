@@ -21,10 +21,10 @@ function formatWithBase(infNum, base=2, len=D(1e300), padStart=0, maxLength=Infi
     var tempCharcode = infNum.div(base.pow(logThing-index)).mod(base).floor();
     var strIdx = +tempCharcode;
     infNum = infNum.sub(base.pow(logThing-index).mul(strIdx));
-    outputString += (hy?`<span style="opacity: ${0.3+(tempCharcode+1)/base.toNumber()*0.7};">`:"") + String.fromCharCode(getModifiedCharcode(strIdx)) + (hy?"</span>":"");
+    outputString += (hy?`<span style="opacity: ${0.3+(tempCharcode.toNumber()+1)/base.toNumber()*0.7};">`:"") + String.fromCharCode(getModifiedCharcode(strIdx)) + (hy?"</span>":"");
   }
   if (padStart && hy) {
-    var needToPush = +(len.valueOf()) - outputString.replace(/(<[^<>]+>)/g, '').length;
+    var needToPush = +(len.valueOf()) - outputString.replace(/(<([^<>]+)>)/g, '$1').length;
     console.log(needToPush);
     outputString = `<span style="opacity: 0.3">${'0'.repeat(Math.max(0, needToPush))}</span>` + outputString;
   } else if (padStart && outputString.length <= maxLength) {
