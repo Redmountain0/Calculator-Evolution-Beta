@@ -304,7 +304,7 @@ function calcQubitSpeed() {
 }
 function calcUsedQubit() {
   var tempUsed = D(0);
-  for (var i = 0; i < 36; i++) {
+  for (var i = 0; i < qUpgradeData.count; i++) {
     var fixedIdx = [Math.floor(i/qUpgradeData.row), i%qUpgradeData.col];
     if (game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) {
       tempUsed = tempUsed.add(getQuantumUpgradeCost(i));
