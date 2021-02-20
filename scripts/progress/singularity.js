@@ -248,6 +248,7 @@ function wormholeChallengeEnter(idx) {
     if (!canJoinWormholeChallenge() || !(calcChallengeDone() > 10 || confirm(`Do you want to enter wormhole challenge?\nEntering will perform Singularity reset without SP`))) return;
     game.challengeTime = new Date().getTime();
     game.challengeEntered = idx;
+    game.quantumUpgradeBought = [];
     singularityReset();
   }
 }
