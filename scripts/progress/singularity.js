@@ -159,7 +159,7 @@ function renderSingularity() {
   $("#singularityDesc").innerHTML += `<br>You have <b><span style="color: #fff;">${dNotation(game.singularityPower, 4, 0)} Singularity Power</span></b>`;
   $("#singularityDesc").innerHTML += `<br>Each SP increases Multi Process by 4 (tot ${Math.floor(Math.min(25, game.singularityPower.toNumber()*4)+Math.max(0, game.singularityPower.toNumber()*4-25)**0.5)}, softcap at 25)`
   $("#singularityDesc").innerHTML += `<br>And boosts grid machine Power by x${dNotation(game.singularityPower.pow(4), 4, 0)}`;
-  $("#singularityDesc").innerHTML += `<br>Have ${3**calcMilestoneDone()*2} SP to retain Keep ${romanize(calcMilestoneDone()+1).toUpperCase()}`;
+  if (calcMilestoneDone() < 7) $("#singularityDesc").innerHTML += `<br>Have ${3**calcMilestoneDone()*2} SP to retain Keep ${romanize(calcMilestoneDone()+1).toUpperCase()}`;
   $("#wormholeChallengeWarp").style.display = game.t4resets.gte(2) ? "block" : "none";
   $("#gridReq").innerHTML = `Complete ${4-(calcChallengeDone()+3)%4} more challenge to unlock ${ordNum(calcGridOpened()+1)} Grid space`;
   //$("#challengeReq").innerHTML = `Go singularity ${dNotation(game.t4resets.toNumber(), 4, 0)}/${calcWormholeChallengeReq()} times to enter Challenge (Increases per challenge complete)`;
@@ -338,6 +338,7 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
 
   // multiplies
   if (game.achievements.includes(34)) tempSpGain4 = tempSpGain4.mul(4);
+  if (game.quantumUpgradeBought.includes('76')) tempSpGain4 = tempSpGain4.mul(D(2).pow(D(game.quantumLab).add(1).log(10)));
 
   return tempSpGain4; // return SP gain
 }
@@ -353,6 +354,7 @@ function clacMachineUsed(name) {
 function calcGridMult() {
   var mul = D(1);
   mul = mul.mul(game.singularityPower.pow(4));
+  if (game.quantumUpgradeBought.includes('71')) mul = mul.mul(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)));
   return mul;
 }
 function calcWormholeChallengeReq() {

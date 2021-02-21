@@ -129,12 +129,14 @@ body {
 #programStatusArea > span {
   display: block; float: left;
   margin-right: 0.3vh;
+}
+#programStatusArea > span:not(:first-child) {
   width: 1.3vh; height: 1.3vh;
   border: 0.2vh solid rgba(54, 156, 26, 0.5);
   background-color: rgba(0, 0, 0, 0);
   transition: background-color cubic-bezier(.19,1.82,.96,-0.89) 0.4s, box-shadow cubic-bezier(.19,1.82,.96,-0.89) 0.4s;
 }
-#programStatusArea > span.activated {
+#programStatusArea > span:not(:first-child).activated {
   background-color: rgba(54, 156, 26, 0.5);
   box-shadow: 0 0 0.6vh rgb(54, 156, 26);
 }

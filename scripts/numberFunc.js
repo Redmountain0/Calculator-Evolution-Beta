@@ -25,7 +25,6 @@ function formatWithBase(infNum, base=2, len=D(1e300), padStart=0, maxLength=Infi
   }
   if (padStart && hy) {
     var needToPush = +(len.valueOf()) - outputString.replace(/(<([^<>]+)>)/g, '$1').length;
-    console.log(needToPush);
     outputString = `<span style="opacity: 0.3">${'0'.repeat(Math.max(0, needToPush))}</span>` + outputString;
   } else if (padStart && outputString.length <= maxLength) {
     outputString = outputString.padStart(+(len.valueOf()), '0');

@@ -127,6 +127,7 @@ function renderBasic() {
   // programStatusArea
   $("#programStatusArea").style.display = game.t3toggle ? "block" : "none";
   [...document.getElementsByClassName("programStatusNode")].forEach((ele, idx) => {ele.classList[game.programActive[idx]?"add":"remove"]("activated")});
+  $("#programStatusProcess").innerHTML = `${calcMultiProcess()-calcProcessLeft()}/${calcMultiProcess()}`;
 
 }
 function renderModule() {
@@ -338,6 +339,7 @@ function calcCPU() {
   if (game.quantumUpgradeBought.includes('14')) tempVar = tempVar.mul(D(9).pow(game.quantumLab));
   if (game.quantumUpgradeBought.includes('15')) tempVar = tempVar.mul(D(30).pow(D.max(0, calcMaxDigit().sub(calcMaxDigit().lt(2000)?game.digits:0))));
   if (game.quantumUpgradeBought.includes('16')) tempVar = tempVar.mul(game.researchPoint.add(1).pow(0.25));
+  if (game.quantumUpgradeBought.includes('17')) tempVar = tempVar.mul(D(10).pow(game.singularityPower.pow(0.5)));
   if (game.achievements.includes(25)) tempVar = tempVar.mul(25);
   return tempVar;
 }

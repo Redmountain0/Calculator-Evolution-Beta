@@ -50,6 +50,7 @@ tempGame = {
 };
 game = {};
 
+//            vvv    commandAppear=1
 function save(c=1) {
   if ((new Date().getTime())-game.lastRestoreSaved >= 1000*3600) {
     localStorage[`CalculatorEvolution2_restore${game.saveRestorePoint%24}`] = JSON.stringify(game);

@@ -9,7 +9,7 @@
       "Each Quantum Lab Boosts CPU by x27 (x${dNotation(D(27).pow(game.quantumLab), 4, 0)})",
       "Each Grey digit boosts CPU by x30 (x${dNotation(D(30).pow(D.max(0, calcMaxDigit().sub(calcMaxDigit().lt(2000)?game.digits:0))), 4, 0)})<br><b style=\"opacity: 0.6\">If max base is bigger than 2000, this bonus will based on max Digit</b>",
       "RP boosts CPU (x${dNotation(game.researchPoint.add(1).pow(0.25), 4, 1)})<br>And sqrt Quantum Lab RP req",
-      "Coming Soon!"
+      "SP boosts CPU (x${dNotation(D(10).pow(game.singularityPower.pow(0.5)), 2, 1)})"
     ],
     // 2: Research
     [
@@ -63,12 +63,12 @@
     ],
     // 7: Singularity
     [
+      "Multiply Grid Machine Power Based on QL (x${dNotation(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)), 4, 2)})",
       "Coming Soon!",
       "Coming Soon!",
       "Coming Soon!",
       "Coming Soon!",
-      "Coming Soon!",
-      "Coming Soon!",
+      "Multiply SP gain based on QL (x${dNotation(D(2).pow(D(game.quantumLab).add(1).log(10)), 3, 1)})",
       "Coming Soon!"
     ]
   ];
@@ -77,11 +77,11 @@
   quantumUpgradeRestartConfrim = 10;
   qUpgradeData = {
     count: 49, col: 7, row: 7,
-    row123cost: [2, 8, 18, 32, 48, 155, 3123],
+    row123cost: [2, 8, 18, 32, 48, 155, 1213],
     row4cost: [1, 5, 11, 20, 30, 97, 400],
     row5cost: [1, 4, 10, 17, 26, 86, 220],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
-    row7cost: [160, 320, 640, 1280, 2560, 5120, 10240]
+    row7cost: [160, 480, 900, 1240, 2560, 3460, 12123]
   };
 
   // upgrade node init
