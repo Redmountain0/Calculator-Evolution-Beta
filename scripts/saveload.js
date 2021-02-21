@@ -130,6 +130,7 @@ function undoGame() {
     game = uSave;
     save(0);
     load(0);
+    commandAppend("load backup #" + uSave.saveRestorePoint)
   } else {
     alert("no backup found!");
   }
