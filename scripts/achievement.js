@@ -26,7 +26,7 @@
     'game.quantumLab.gte(1)', 'game.qubit.gte(10)', 'game.quantumUpgradeBought.length>=8', 'game.quantumLab.gte(7)', 'game.qubit.gte(50)',
     'game.money.gte(\'1e1000\')', 'game.base.gte(250)', 'game.researchPoint.gte(D(2).pow(1024))', 'game.qubit.gte(1024)', 'game.quantumLab.gte(82)',
     'game.t4resets.gte(1)', 'game.t4resets.gte(2)', 'calcChallengeDone() >= 1', 'calcQuantumLabGain().gte(20)', 'calcChallengeDone() >= 10',
-    'game.quantumUpgradeBought.length>=36', '0', 'game.wormholeChallengeProgress[6]>=1', 'game.t4resetTime <= 20000', 'game.t4resets.gte(100)',
+    'game.quantumUpgradeBought.length>=36', 'game.quantumLab.gte(200)', 'game.wormholeChallengeProgress[6]>=1', 'game.t4resetTime <= 20000', 'game.t4resets.gte(100)',
     'game.qubit.gte(10e3)', 'game.wormholeChallengeProgress[7]>=1', 'game.money.gte("1e9000000000000")', '0', '0'
   ];
 })();
