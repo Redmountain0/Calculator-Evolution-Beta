@@ -486,7 +486,7 @@ class SingularityMachine {
     var power = this.value.mul(D(1e4).pow(this.tier));
     var iMachines = this.getInteracts();
     if (this.type != "Booster") for (var i = 0, l = iMachines.length; i < l; i++) if (iMachines[i].type == "Booster") power = power.mul(iMachines[i].getPower());
-    power = power.pow(this.tier/10+0.5);
+    power = power.pow(this.tier/15+0.5);
     power = power.mul(calcGridMult());
     return power;
   }
