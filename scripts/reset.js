@@ -25,15 +25,17 @@ function quantumReset() {
     game.researchSpeed[i] = 0;
   }
   game.durability = D(1).mul(game.researchLevel[5]+1);
-  for (var i = 0; i < 15; i++) {
-    if (i < 5) {
-      if (game.quantumUpgradeBought.includes('64')) continue;
-      if (game.quantumUpgradeBought.includes('61')) {
-        game.shopBought[i] = Math.min(1, game.shopBought[i]);
-        continue;
+  if (game.quantumUpgradeBought.includes('66')) {
+    for (var i = 0; i < 15; i++) {
+      if (i < 5) {
+        if (game.quantumUpgradeBought.includes('64')) continue;
+        if (game.quantumUpgradeBought.includes('61')) {
+          game.shopBought[i] = Math.min(1, game.shopBought[i]);
+          continue;
+        }
       }
+      game.shopBought[i] = 0;
     }
-    game.shopBought[i] = 0;
   }
   if (game.quantumUpgradeBought.includes('41') && game.researchLevel[1] < 2) game.researchLevel[1] = 2;
   game.quantumTime = new Date().getTime();
