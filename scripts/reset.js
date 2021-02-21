@@ -25,7 +25,7 @@ function quantumReset() {
     game.researchSpeed[i] = 0;
   }
   game.durability = D(1).mul(game.researchLevel[5]+1);
-  if (game.quantumUpgradeBought.includes('66')) {
+  if (!game.quantumUpgradeBought.includes('66')) {
     for (var i = 0; i < 15; i++) {
       if (i < 5) {
         if (game.quantumUpgradeBought.includes('64')) continue;
