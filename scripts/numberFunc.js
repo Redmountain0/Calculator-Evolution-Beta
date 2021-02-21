@@ -66,7 +66,7 @@ function factorial(num) {
     return tempNum;
   }
 }
-function numToOrd(num){
+function ordNum(num){
   let numMod100 = num % 100
   let ord = ""
   if (Math.floor(numMod100 / 10) == 1) ord = "th"
