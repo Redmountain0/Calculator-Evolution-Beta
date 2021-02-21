@@ -201,7 +201,7 @@ function renderGrid() {
         var tempObj = singularityMachineData[thisMachine.type];
         tempEle[0].innerHTML = thisMachine.tier;
         tempEle[1].innerHTML = tempObj.name;
-        tempEle[2].innerHTML = dNotation(thisMachine.value, 3, 2);
+        tempEle[2].innerHTML = dNotation(thisMachine.value, 2, 2);
         tempEle[3].style.setProperty("--arrowState", thisMachine.rotate);
         tempEle[0].style.display = typeof tempObj.hasTier == "undefined" || tempObj.hasTier == 1 ? "block" : "none";
         tempEle[1].style.display = typeof tempObj.hasName == "undefined" || tempObj.hasName == 1 ? "block" : "none";
@@ -486,7 +486,7 @@ class SingularityMachine {
     var power = this.value.mul(D(1e4).pow(this.tier));
     var iMachines = this.getInteracts();
     if (this.type != "Booster") for (var i = 0, l = iMachines.length; i < l; i++) if (iMachines[i].type == "Booster") power = power.mul(iMachines[i].getPower());
-    power = power.pow(this.tier/20+0.5);
+    power = power.pow(this.tier/10+0.5);
     power = power.mul(calcGridMult());
     return power;
   }
