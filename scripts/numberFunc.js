@@ -66,19 +66,26 @@ function factorial(num) {
     return tempNum;
   }
 }
-function ordNum(num) {
-  num = D(num).floor();
-  var ordStr = "";
-  if (num.eq(1) || (num.gt(20) && num.mod(10).eq(1))) {
-    ordStr = "st";
-  } else if (num.eq(2) || (num.gt(20) && num.mod(10).eq(2))) {
-    ordStr = "nd";
-  } else if (num.eq(3) || (num.gt(20) && num.mod(10).eq(3))) {
-    ordStr = "rd";
-  } else {
-    ordStr = "th";
+function numToOrd(num){
+  let numMod100 = num % 100
+  let ord = ""
+  if (Math.floor(numMod100 / 10) == 1) ord = "th"
+  else {
+    switch(numMod100 % 10) {
+    case 1:
+      ord = "st"
+      break;
+    case 2:
+      ord = "nd"
+      break;
+    case 3:
+      ord = "rd"
+      break;
+    default:
+      ord = "th"
+    }
   }
-  return num.valueOf() + ordStr;
+  return num + ord
 }
 function romanize (num) {
   if (num == 0) {

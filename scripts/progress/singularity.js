@@ -179,7 +179,7 @@ function calcSingularity() {
       if (game.wormholeChallengeProgress[game.challengeEntered] < 10) {
         game.wormholeChallengeProgress[game.challengeEntered]++;
         game.singularityPower = game.singularityPower.add(1);
-        commandAppend(`Challenge Done! (x${game.wormholeChallengeProgress[game.challengeEntered]-1} -> x${game.wormholeChallengeProgress[game.challengeEntered]})`, 30, 1);
+        commandAppend(`Challenge Done! (x${game.wormholeChallengeProgress[game.challengeEntered]-1})`, 30, 1);
         if (!game.achievements.includes(29)) {
           game.challengeEntered = -1;
           singularityReset();
