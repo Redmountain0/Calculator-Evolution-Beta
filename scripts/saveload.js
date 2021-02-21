@@ -52,7 +52,7 @@ game = {};
 
 //            vvv    commandAppear=1
 function save(c=1) {
-  if ((new Date().getTime())-game.lastRestoreSaved >= 1000*3600) {
+  if ((new Date().getTime())-game.lastRestoreSaved >= 1000) {
     localStorage[`CalculatorEvolution2_restore${game.saveRestorePoint%24}`] = JSON.stringify(game);
     game.saveRestorePoint++;
     game.lastRestoreSaved = new Date().getTime();
@@ -121,5 +121,16 @@ function importGame() {
     commandAppend('import string to game');
   } catch (e) {
     commandAppend('invaild savefile!', -110, 1);
+  }
+}
+function undoGame() {
+  var uSave = JSON.parse(localStorage[`CalculatorEvolution2_restore${(game.saveRestorePoint-1)%24}`]);
+  if (game.saveRestorePoint-uSave.saveRestorePoint == 1) {
+    if (!confirm(`Are you sure to load ${timeNotation((new Date().getTime() - uSave.lastRestoreSaved)/1000)} ago save?`)) return;
+    game = uSave;
+    save(0);
+    load(0);
+  } else {
+    alert("no backup found!");
   }
 }
