@@ -6,6 +6,9 @@
   overflow: visible;
 }
 body {
+  --baseCol: #49d124;
+  --baseCol2: #369c1a;
+  --baseCol3: rgba(54, 156, 26, 0.5);
   --whiteglow: whiteGlow ease 5s infinite;
   --color: #fff;
   --shadow: 0 0 0.4vh #fff;
@@ -62,8 +65,8 @@ body {
   transition: 0s;
 }
 .t1Nav {
-  border: 0.35vh solid #49d124;
-  background-color: rgba(54, 156, 26, 0.5);
+  border: 0.35vh solid var(--baseCol);
+  background-color: var(--baseCol3);
   cursor: pointer;
   animation: greenGlow ease 5s infinite;
 }
@@ -132,13 +135,13 @@ body {
 }
 #programStatusArea > span:not(:first-child) {
   width: 1.3vh; height: 1.3vh;
-  border: 0.2vh solid rgba(54, 156, 26, 0.5);
+  border: 0.2vh solid var(--baseCol3);
   background-color: rgba(0, 0, 0, 0);
   transition: background-color cubic-bezier(.19,1.82,.96,-0.89) 0.4s, box-shadow cubic-bezier(.19,1.82,.96,-0.89) 0.4s;
 }
 #programStatusArea > span:not(:first-child).activated {
-  background-color: rgba(54, 156, 26, 0.5);
-  box-shadow: 0 0 0.6vh rgb(54, 156, 26);
+  background-color: var(--baseCol3);
+  box-shadow: 0 0 0.6vh var(--baseCol);
 }
 
 #infoArea {
@@ -179,7 +182,7 @@ body {
 }
 .sectionTxt {
   margin: 1.4vh 0 0 3.5vw;
-  font-size: 2.5vh; color: #369c1a; text-shadow: 0 0 0.4vh #369c1a;
+  font-size: 2.5vh; color: var(--baseCol2); text-shadow: 0 0 0.4vh var(--baseCol2);
 }
 .sectionTxt:nth-of-type(1) {
   width: 12vw;
@@ -207,19 +210,19 @@ body {
   filter: blur(0);
 }
 .program:active {
-  border: 0.1vh solid #49d124;
-  background-color: rgba(54, 156, 26, 0.5);
+  border: 0.1vh solid var(--baseCol);
+  background-color: var(--baseCol3);
   filter: blur(0);
   transition: all 0s;
 }
 .program.active {
-  border: 0.1vh solid #49d124;
-  background-color: rgba(54, 156, 26, 0.5);
+  border: 0.1vh solid var(--baseCol);
+  background-color: var(--baseCol3);
   filter: blur(0);
   transition: all 0.3s;
 }
 .program.active:hover {
-  border: 0.1vh solid #49d124;
+  border: 0.1vh solid var(--baseCol);
   background-color: rgba(54, 156, 26, 0.8);
   filter: blur(0.1vh);
 }
@@ -435,15 +438,15 @@ body {
 #rebootButton.disabled {
   cursor: auto;
   filter: grayscale(1);
-  color: #49d124; text-shadow: 0 0 0.4vh #49d124;
+  color: var(--baseCol); text-shadow: 0 0 0.4vh var(--baseCol);
   background-color: #2e8018;
-  border: 0.4vh solid #49d124;
+  border: 0.4vh solid var(--baseCol);
   box-shadow: 0 0 0 0 #2e8018 inset;
   transition: all 1s;
   animation: none;
 }
 #rebootDesc {
-  color: #49d124; font-size: 1.8vh;
+  color: var(--baseCol); font-size: 1.8vh;
   height: 6vh;
 }
 #rpDisplay {
@@ -565,8 +568,8 @@ body {
 .optionBtn {
   margin: 1vh 0 0 0; padding: 0.25vh 1vw;
   display: inline-block;
-  border: 0.35vh solid #49d124; border-radius: 0.5vh;
-  background-color: rgba(54, 156, 26, 0.5);
+  border: 0.35vh solid var(--baseCol); border-radius: 0.5vh;
+  background-color: var(--baseCol3);
   font-size: 3vh;
   cursor: pointer;
   transition: all ease 0.3s;
@@ -940,5 +943,5 @@ body {
 }
 
 .normalText {
-  color: #49d124; font-size: 1.8vh;
+  color: var(--baseCol); font-size: 1.8vh;
 }

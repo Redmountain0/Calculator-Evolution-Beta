@@ -106,8 +106,8 @@
   }
 
   // theme init
-  themeUrls = ['./themes/none.css', './themes/compact.css'];
-  themeName = ["Default", "Compact"];
+  themeUrls = ['./themes/none.css', './themes/compact.css', './themes/aqua.css'];
+  themeName = ["Default", "Compact", "Aqua"];
   var link = document.createElement( "link" );
   link.id = "compactCssElement";
   link.href = `./themes/none.css`;
