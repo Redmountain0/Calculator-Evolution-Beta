@@ -123,6 +123,7 @@ function importGame() {
   } catch (e) {
     commandAppend('invaild savefile!', -110, 1);
   }
+  setTheme();
 }
 function undoGame() {
   var uSave = JSON.parse(localStorage[`CalculatorEvolution2_restore${(game.saveRestorePoint-1)%24}`]);
@@ -135,4 +136,5 @@ function undoGame() {
   } else {
     alert("no backup found!");
   }
+  setTheme();
 }
