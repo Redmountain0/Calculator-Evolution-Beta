@@ -110,6 +110,19 @@ function calcResearch() {
     if (game.researchProgress[i] >= 1) {
       game.researchProgress[i] = 0;
       game.researchLevel[i]++;
+
+      // max upgrade
+      var mPoint = 20, maxA = 2**mPoint, power = calcResearchSpeed(game.researchSpeed[i]).div(1000);
+      for (var j = 0; j < mPoint; j++) {
+        maxA += 2**(mPoint-1-j)*((power.gte(calcResearchDivide(i, maxA)))*2-1);
+      }
+      for (var j = 0; j < 6; j++) {
+        if (power.gt(calcResearchDivide(i, maxA))) maxA++;
+        if (power.lt(calcResearchDivide(i, maxA))) maxA--;
+      }
+      var bulkLv = maxA;
+      var bulkBuyCount = bulkLv-game.researchLevel[i]+1;
+      if (power.gte(calcResearchDivide(i, maxA)) && bulkBuyCount > 0) game.researchLevel[i] += bulkBuyCount;
     }
   }
   if (game.quantumUpgradeBought.includes('43')) game.researchPoint = game.researchPoint.add(calcRPGain().gt(1) ? calcRPGain().mul(0.3*(1/calcRebootCooldown())*1000).mul(calcRealTgain()) : 0);
@@ -183,32 +196,24 @@ function calcResearchSpeed(lv) {
     return D(0);
   }
 }
-function calcResearchDivide(num) {
-  switch (num) {
+function calcResearchDivide(idx, lv=game.researchLevel[idx]) {
+  switch (idx) {
     case 0:
-    return D(10).mul(factorial(game.researchLevel[num]+1));
-      break;
+    return D(10).mul(factorial(lv+1));
     case 1:
-    return D(20).mul(factorial(game.researchLevel[num]*2.5));
-      break;
+    return D(20).mul(factorial(lv*2.5));
     case 2:
-    return D(40).mul(factorial(game.researchLevel[num]*2+1));
-      break;
+    return D(40).mul(factorial(lv*2+1));
     case 3:
-    return D(5).mul(factorial(game.researchLevel[num]));
-      break;
+    return D(5).mul(factorial(lv));
     case 4:
-    return D(50).mul(factorial(game.researchLevel[num]));
-      break;
+    return D(50).mul(factorial(lv));
     case 5:
-    return D(5).mul(factorial(game.researchLevel[num]*2));
-      break;
+    return D(5).mul(factorial(lv*2));
     case 6:
-    return D(50).mul(factorial(game.researchLevel[num]**1.4));
-      break;
+    return D(50).mul(factorial(lv**1.4));
     case 7:
-    return D(150).mul(factorial(game.researchLevel[num]**2/2));
-      break;
+    return D(150).mul(factorial(lv**2/2));
     default:
     return D(Infinity);
   }
