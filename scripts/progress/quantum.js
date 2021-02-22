@@ -90,9 +90,12 @@
     upNode.classList.add('quantumUpgrade');
     upNode.style.setProperty("--col", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150, 0.5+i/300));
     upNode.style.setProperty("--col2", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150-0.3, 0.5+i/300-0.3));
+    
     upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
     upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
+
     upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
+    upNode.onmousedown = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
     $('#quantumUpgrades').append(upNode);
   }
 })();
