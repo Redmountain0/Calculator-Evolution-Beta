@@ -6,7 +6,7 @@
     'New Age<br>*', '2^10', 'Skilled', 'Lab Town<br>*', '2^50<br>*',
     'Richer<br>*', 'A to Œ<br>*', 'Infinity Research<br>*', 'Infinity Boost', '2 more?<br>*',
     'Singularity<br>*', 'Second Singularity<br>*', 'Challenge', 'Bulk QL Challenge<br>*', 'More Challenges<br>*',
-    'Mastered<br>*', 'Give me more QUBIT!', 'Grid Lab<br>*', 'Speed Singularity<br>*', 'Singularit<br>ies<br>*',
+    'Mastered<br>*', 'Give me more QUBIT!<br>*', 'Grid Lab<br>*', 'Speed Singularity<br>*', 'Singularit<br>ies<br>*',
     '2^10k', 'Broken Machine', 'Bugged Reality<br>*', 'Inf..', 'GG'
   ];
   achievementGoal = [
@@ -16,7 +16,7 @@
     'Perform Quantum<br>Reward: Multiply Mine power by x10', 'Have ${dNotation(10, 4, 0)} Qubits', 'Have ${dNotation(8, 4, 0)} Quantum Upgrades', "Have ${dNotation(7, 0, 0)} Quantum Labs<br>Reward: Qubit production speed x3", 'Have ${dNotation(50, 4, 0)} Qubits<br>Reward: Qubit production speed x1.5',
     'Have ${dNotation("1e1000", 4, 0)} $<br>Reward: Multiply mine power by x10', 'Reach base ${dNotation(250, 4, 0)}<br>Reward: Shop cost /10', 'Have ${dNotation(D(2).pow(1024), 6, 0)} RP<br>Reward: Start Quantum run with 100 RP', 'Have ${dNotation(1024, 4, 0)} Qubits', 'Have ${dNotation(82, 0, 0)} Labs<br>Reward: Shift Qubit production by +2QL',
     'Go singularity<br>Reward: CPU speed x25', 'Go singularity one more time<br>Reward: RP gain x10', 'Complete a challenge', 'Reach bulk ${dNotation(20, 0, 0)} Quantum Labs<br>Reward: ^0.9 Quantum requirements ', 'Complete ${dNotation(10, 0, 0)} Challenges<br>Reward: All Challenge requirement -2<br>Can bulk complete Challenge',
-    'Buy all Quantum Upgrades<br>Reward: More Quantum Upgrades', 'Have ${dNotation(200, 0, 0)} Quantum Labs', 'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL', 'Go Singularity in 20 seconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space', 'Go singularity ${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
+    'Buy all Quantum Upgrades<br>Reward: More Quantum Upgrades', 'Have ${dNotation(200, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed Challenge Completions (^${1+calcChallengeDone()/200})', 'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL', 'Go Singularity in 20 seconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space', 'Go singularity ${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
     'Have ${dNotation(10e3, 4, 0)} Qubits', 'Complete Boost Challenge once', 'Reach Infinity$<br>Reward: Game speed x2', 'Go Infinity in 5 hours', 'Go Infinity in 10 seconds'
   ];
   achievementGoalFunc = [
