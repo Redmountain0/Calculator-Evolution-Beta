@@ -137,7 +137,7 @@
     QubitBoost: D(1)
   };
   singularityBoosts = {};
-  margerWorks = {};
+  mergerWorks = {};
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
 })();
 
@@ -172,7 +172,7 @@ function renderSingularity() {
 function calcSingularity() {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
   for (var i in game.singularityGrid) game.singularityGrid[i].update();
-  for (var i in margerWorks) margerWorks[i] = [...new Set(margerWorks[i])];
+  for (var i in mergerWorks) mergerWorks[i] = [...new Set(mergerWorks[i])];
   if (game.quantumUpgradeBought.includes('67')) game.singularityPower = game.singularityPower.add(calcSingularityPowerGain().mul(tGain/10));
   if (game.challengeEntered != -1) {
     if (game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
@@ -228,7 +228,7 @@ function renderGrid() {
 }
 function singularityMachineChanged() {
   for (var i in game.singularityGrid) game.singularityGrid[i].value = D(1);
-  margerWorks = {};
+  mergerWorks = {};
 }
 function getSingularityMachineHave(name) {
   if (challengeIdx.includes(name)) {
@@ -302,8 +302,8 @@ function renderGridSideInfo() {
       if (thisData.hasValue != false) thingToWrite += `<br>Value: ${dNotation(thisMachine.value, 4, 2)}`;
       if (thisData.hasValue != false) thingToWrite += `<br>> Power: ${dNotation(thisMachine.getPower(), 4, 2)}`;
       if (thisData.hasBoost) thingToWrite += `<br>&nbsp;> Boost: ${thisMachine.getBoostString()}`;
-    } else if (typeof margerWorks[gridOn.x + '' + gridOn.y] != "undefined") {
-      var m = margerWorks[gridOn.x + '' + gridOn.y];
+    } else if (typeof mergerWorks[gridOn.x + '' + gridOn.y] != "undefined") {
+      var m = mergerWorks[gridOn.x + '' + gridOn.y];
       thingToWrite += "<br><br>Boost List<br>---------------";
       for (var i = 0; i < m.length; i++) {
         var tempMachine = game.singularityGrid[m[i]];
@@ -435,7 +435,7 @@ class SingularityMachine {
       this.getPointedMachine().value = this.getPointedMachine().value.add(power.mul(calcRealTgain()));
         break;
       case "Merger":
-        var m = margerWorks[this.position.x + '' + this.position.y];
+        var m = [...new Set(mergerWorks[this.position.x + '' + this.position.y])];
         if (this.getPointedMachine().type == "Output" && typeof m != "undefined") {
           for (var i = 0; i < m.length; i++) {
             var tempMachine = game.singularityGrid[m[i]];
@@ -450,19 +450,19 @@ class SingularityMachine {
         switch (this.getPointedMachine().type) {
           case "Output":
             if (typeof singularityBoosts[this.type] != "undefined") {
-              singularityBoosts[this.type] = singularityBoosts[this.type][singularityMachineData[this.type].boostType](this.getBoost())
+              singularityBoosts[this.type] = singularityBoosts[this.type][singularityMachineData[this.type].boostType](this.getBoost());
             } else {
               return 0;
             }
             break;
           case "Merger":
-            var p = this.getPointed(); 
-            if (typeof margerWorks[p] == "undefined") margerWorks[p] = [];
+            var p = this.getPointed();
+            if (typeof mergerWorks[p] == "undefined") mergerWorks[p] = [];
             if (this.type != "Merger") {
               if (!singularityMachineData[this.type].hasBoost) return 0;
-              margerWorks[p].push(this.position.x + '' + this.position.y);
-            } else if (typeof margerWorks[this.position.x + '' + this.position.y] != "undefined") {
-              margerWorks[p] = margerWorks[p].concat(margerWorks[this.position.x + '' + this.position.y]);
+              mergerWorks[p].push(this.position.x + '' + this.position.y);
+            } else if (typeof mergerWorks[this.position.x + '' + this.position.y] != "undefined") {
+              mergerWorks[p] = mergerWorks[p].concat(mergerWorks[this.position.x + '' + this.position.y]);
             }
             break;
         }
