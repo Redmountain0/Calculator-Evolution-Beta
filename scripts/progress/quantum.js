@@ -63,7 +63,7 @@
     ],
     // 7: Singularity
     [
-      "Multiply Grid Machine Power Based on QL (x${dNotation(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)), 4, 2)})",
+      "Multiply Grid Machine Power Based on QL (x${dNotation(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)).add(1), 4, 2)})",
       "Coming Soon!",
       "Coming Soon!",
       "Coming Soon!",

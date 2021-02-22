@@ -159,7 +159,7 @@ function renderSingularity() {
   $("#singularityDesc").innerHTML += `<br>You have <b><span style="color: #fff;">${dNotation(game.singularityPower, 4, 0)} Singularity Power</span></b>`;
   $("#singularityDesc").innerHTML += `<br>Each SP increases Multi Process by 4 (tot ${Math.floor(Math.min(25, game.singularityPower.toNumber()*4)+Math.max(0, game.singularityPower.toNumber()*4-25)**0.5)}, softcap at 25)`
   $("#singularityDesc").innerHTML += `<br>And boosts grid machine Power by x${dNotation(game.singularityPower.pow(4), 4, 0)}`;
-  if (calcMilestoneDone() < 7) $("#singularityDesc").innerHTML += `<br>Have ${3**calcMilestoneDone()*2} SP to retain Keep ${romanize(calcMilestoneDone()+1).toUpperCase()}`;
+  if (calcMilestoneDone() < 7) $("#singularityDesc").innerHTML += `<br>Have ${2**calcMilestoneDone()*2} SP to retain Keep ${romanize(calcMilestoneDone()+1).toUpperCase()}`;
   $("#wormholeChallengeWarp").style.display = game.t4resets.gte(2) ? "block" : "none";
   $("#gridReq").innerHTML = `Complete ${4-(calcChallengeDone()+3)%4} more challenge to unlock ${ordNum(calcGridOpened()+1)} Grid space`;
   //$("#challengeReq").innerHTML = `Go singularity ${dNotation(game.t4resets.toNumber(), 4, 0)}/${calcWormholeChallengeReq()} times to enter Challenge (Increases per challenge complete)`;
@@ -340,7 +340,9 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
   if (game.achievements.includes(34)) tempSpGain4 = tempSpGain4.mul(4);
   if (game.quantumUpgradeBought.includes('76')) tempSpGain4 = tempSpGain4.mul(D(2).pow(D(game.quantumLab).add(1).log(10)));
 
-  return tempSpGain4; // return SP gain
+  // return SP gain
+  if (baseRes.lt(80)) return D(0);
+  return tempSpGain4;
 }
 function calcGridOpened() {
   return Math.min(25, 4+Math.floor((calcChallengeDone()+3)/4));
@@ -354,7 +356,7 @@ function clacMachineUsed(name) {
 function calcGridMult() {
   var mul = D(1);
   mul = mul.mul(game.singularityPower.pow(4));
-  if (game.quantumUpgradeBought.includes('71')) mul = mul.mul(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)));
+  if (game.quantumUpgradeBought.includes('71')) mul = mul.mul(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)).add(1));
   return mul;
 }
 function calcWormholeChallengeReq() {
@@ -409,7 +411,9 @@ function calcChallengeTimeLeft() {
   return (game.challengeTime - new Date().getTime())/1000 + 60*30;
 }
 function calcMilestoneDone() {
-  return D.max(D(game.singularityPower).div(2).log(3).add(1), 0).floor(0).toNumber();
+  var tempDone = D.max(D(game.singularityPower).div(2).log(2).add(1), 0).floor(0).toNumber();
+  tempDone = Math.min(game.achievements.includes(30)?7:6, tempDone);
+  return tempDone;
 }
 
 // SingularityMachine
