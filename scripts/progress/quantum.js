@@ -94,7 +94,7 @@
     upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
     upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
 
-    upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
+    //upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
     upNode.onmousedown = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
     $('#quantumUpgrades').append(upNode);
   }
