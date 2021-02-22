@@ -90,7 +90,7 @@
     upNode.classList.add('quantumUpgrade');
     upNode.style.setProperty("--col", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150, 0.5+i/300));
     upNode.style.setProperty("--col2", hsvToRgb(Math.floor(i%qUpgradeData.col)/12, 0.5+i/150-0.3, 0.5+i/300-0.3));
-    
+
     upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
     upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
 
@@ -164,7 +164,7 @@ function displayQuantumUpgradeDesc(idx) {
     Cost: ${getQuantumUpgradeCost(idx)} Qubit
   `;
   $("#quantumUpgradeDesc").style.opacity = 1;
-  $("#quantumUpgradeDesc").style.top = this.offsetTop + 'px';
+  $("#quantumUpgradeDesc").style.top = Math.min(innerHeight - $("#quantumUpgradeDesc").offsetHeight, this.offsetTop) + 'px';
   $("#quantumUpgradeDesc").style.transform = 'scaleX(1)';
   $("#quantumUpgradeDesc").style.left = this.offsetLeft + (fixedIdx[1] >= 3 ? -$("#quantumUpgradeDesc").offsetWidth : innerWidth/25 ) + 'px';
 }
