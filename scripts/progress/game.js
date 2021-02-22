@@ -104,6 +104,17 @@
     programStatusNode.classList.add("programStatusNode");
     $("#programStatusArea").append(programStatusNode);
   }
+
+  // theme init
+  themeUrls = ['./themes/none.css', './themes/compact.css'];
+  themeName = ["Default", "Compact"];
+  var link = document.createElement( "link" );
+  link.id = "compactCssElement";
+  link.href = `./themes/none.css`;
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.media = "screen,print";
+  document.getElementsByTagName( "head" )[0].appendChild( link );
 })();
 
 function renderBasic() {
@@ -233,6 +244,10 @@ function setEffects() {
   $('body').style.setProperty('--whiteglow', game.optionToggle[0] ? 'whiteGlow ease 5s infinite' : 'none');
   $('body').style.setProperty('--color', game.optionToggle[0] ? '' : '#fff');
   $('body').style.setProperty('--shadow', game.optionToggle[0] ? '' : '0 0 2vw #fff');
+}
+function setTheme() {
+  document.getElementById("compactCssElement").href = themeUrls[game.theme];
+  document.getElementById("themeBtn").innerHTML = `Theme: ${themeName[game.theme]}`;
 }
 function calcToggleTabs() {
   if (calcRPGain().gte(1)) game.t2toggle = 1;

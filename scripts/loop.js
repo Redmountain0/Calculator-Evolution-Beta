@@ -18,3 +18,4 @@ setInterval( function () {
 
 load();
 initAchievements();
+setTheme();

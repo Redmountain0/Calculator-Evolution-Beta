@@ -25,6 +25,7 @@ tempGame = {
   t2time: 0,
   t2resets: D(0),
   optionToggle: new Array(9).fill(1),
+  theme: 0,
   hyperMode: false,
   achievements: [],
   durability: D(1),
