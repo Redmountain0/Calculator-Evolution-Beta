@@ -150,6 +150,7 @@ function calcQuantumAuto() {
 }
 
 function displayQuantumUpgradeDesc(idx) {
+  if (documentHold) buyQuantumUpgrade(idx);
   var tempCols = [getComputedStyle(this).getPropertyValue("--col"), getComputedStyle(this).getPropertyValue("--col2")];
   var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col]
   $("#quantumUpgradeDesc").innerHTML = `

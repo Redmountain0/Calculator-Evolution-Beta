@@ -105,6 +105,10 @@
     $("#programStatusArea").append(programStatusNode);
   }
 
+  documentHold = 0;
+  document.onmousedown = function() {documentHold = 1};
+  document.onmouseup = function() {documentHold = 0};
+
   // theme init
   themeUrls = ['./themes/none.css', './themes/compact.css', './themes/aqua.css'];
   themeName = ["Default", "Compact", "Aqua"];
