@@ -189,7 +189,7 @@ function hideQuantumUpgradeDesc() {
 function buyQuantumUpgrade(idx) {
   setTimeout( function() {
     var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
-    ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1)) && !t) {
+    ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) {
       // buy
       game.quantumUpgradeBought.push((fixedIdx[1]+1) + '' + (fixedIdx[0]+1));
       if (idx == 3) game.researchLevel[1] = Math.max(2, game.researchLevel[1]);
