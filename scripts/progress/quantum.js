@@ -59,7 +59,7 @@
       "Keep bought Programs (All)",
       "Data_Holder.exe will keep through Quantum",
       "Keep all research and CPU Upgrade",
-      "Above upgrades will keep through Singularity<br><b style=\"opacity: 0.6\">This won't affected by Game Speed<br>exclude challenge enter</b>"
+      "Above upgrades will keep through Singularity<br><b style=\"opacity: 0.6\">exclude challenge enter</b>"
     ],
     // 7: Singularity
     [

@@ -111,7 +111,6 @@ function commandFloat(speed=0.8) {
     }
   }
 }
-//$('body').style.backgroundColor = '#' + Math.floor((16**6-1)*Math.random()).toString(16).padStart(0, 6); what
 
 // etc
 function hsvToRgb(h, s, v) {

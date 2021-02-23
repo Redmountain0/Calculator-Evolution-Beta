@@ -218,8 +218,15 @@ function renderCalcDebugInfo() {
 }
 
 function goTab(num) {
+  // block locked tabs
   if (!game.t3toggle && num == 5) return;
   if (!game.t4toggle && num == 7) return;
+
+  // make, delete events
+  deleteEvents(tabNow);
+  makeEvents(num);
+
+  // go to tab
   if (!rebooting || game.t3toggle) {
     for (var i = 0; i < document.getElementsByClassName('tab').length; i++) {
       $(".tab:nth-of-type(" + (i+1) + ")").style.display = "none";
@@ -228,6 +235,12 @@ function goTab(num) {
     tabNow = num;
     renderAll();
   }
+}
+function deleteEvents(tab) {
+  // TODO
+}
+function makeEvents(tab) {
+  // TODO
 }
 function optionBtn(num) {
   game.optionToggle[num] ^= 1;
