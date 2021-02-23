@@ -185,7 +185,7 @@ function renderShop() {
   $("#cpuSpeed").innerHTML = dNotation(calcCpuUpgradeEffect(), 4, 1);
 }
 function renderOption() {
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 3; i++) {
     $('#optionToggle' + i).className = 'optionBtn' + ((game.optionToggle[i]) ? '' : ' disabled');
   }
 }
