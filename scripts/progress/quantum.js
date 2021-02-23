@@ -151,9 +151,9 @@ function renderQunatum() {
   $("#quantumDesc").innerHTML = `You have ${game.quantumLab} Quantum Lab which makes Qubit Prodution ${dNotation(calcQubitSpeed(), 4, 0)}x faster<br>Each Qubit makes your CPU 2x faster (x${dNotation(calcQubitEffect(), 4, 0)})`;
   $("#qubitDisplay").innerHTML = `You have ${game.qubit.sub(calcUsedQubit())}/${game.qubit} Qubit (next Qubit in ${timeNotation(D(3).pow(game.qubit.sub(calcChallengeDone()).add(1)).sub(game.qubitProgress).div(calcQubitSpeed()))})`;
 }
-function calcQuantum() {
+function calcQuantum(dt=0) {
   if (game.quantumUpgradeBought.includes('46') && D(3).pow(game.qubit.sub(calcChallengeDone()).add(1)).sub(game.qubitProgress).div(calcQubitSpeed()).lte(60*7)) game.qubitProgress = D(3).pow(game.qubitProgress.add(1).log(3).ceil(0));
-  game.qubitProgress = game.qubitProgress.add(calcQubitSpeed().mul(calcRealTgain()));
+  game.qubitProgress = game.qubitProgress.add(calcQubitSpeed().mul(calcRealDt(dt)));
   game.qubit = D.max(0, game.qubitProgress.add(1).log(3)).floor(0).add(calcChallengeDone());
   calcQuantumAuto();
 }

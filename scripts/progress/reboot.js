@@ -105,9 +105,9 @@ function researchMaxBuy(num) {
   }
 }
 
-function calcResearch() {
+function calcResearch(dt=0) {
   for (var i = 0; i < 9; i++) {
-    game.researchProgress[i] += Number(calcResearchSpeed(game.researchSpeed[i]).div(calcResearchDivide(i)).valueOf())*calcRealTgain();
+    game.researchProgress[i] += Number(calcResearchSpeed(game.researchSpeed[i]).div(calcResearchDivide(i)).valueOf())*calcRealDt(dt);
     if (game.researchProgress[i] >= 1) {
       game.researchProgress[i] = 0;
       game.researchLevel[i]++;
@@ -126,7 +126,7 @@ function calcResearch() {
       if (power.gte(calcResearchDivide(i, maxA)) && bulkBuyCount > 0) game.researchLevel[i] += bulkBuyCount;
     }
   }
-  if (game.quantumUpgradeBought.includes('43')) game.researchPoint = game.researchPoint.add(calcRPGain().gt(1) ? calcRPGain().mul(0.3*(1/calcRebootCooldown())*1000).mul(calcRealTgain()) : 0);
+  if (game.quantumUpgradeBought.includes('43')) game.researchPoint = game.researchPoint.add(calcRPGain().gt(1) ? calcRPGain().mul(0.3*(1/calcRebootCooldown())*1000).mul(calcRealDt(dt)) : 0);
   if (rebooting && game.t2time < new Date().getTime()-calcRebootCooldown()) {
     rebooting = 0;
     $('#rebootButton').className = "";

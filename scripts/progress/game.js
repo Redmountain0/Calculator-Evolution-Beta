@@ -443,18 +443,18 @@ function getBaseIncreaseReq() {
     )
   ).sub(1);
 }
-function calcProgram() {
+function calcProgram(dt=0) {
   if (isProcessExceed() && !game.quantumUpgradeBought.includes('47')) game.programActive = [...new Array(15).fill(0)];
   if (rebooting) return;
   if (game.programActive[0]) {
-    game.number = D.min(game.number.plus(calcCPU().mul(calcRealTgain())), game.base.pow(game.digits).sub(1));
+    game.number = D.min(game.number.plus(calcCPU().mul(calcRealDt(dt))), game.base.pow(game.digits).sub(1));
     game.rebootNum = D.max(game.number, game.rebootNum);
     rainbowEffect("#basedNumber");
   } else {
     delRainbowEffect("#basedNumber");
   }
   if (game.programActive[1]) {
-    game.money = game.money.plus(calcMoneyGain().mul(calcRealTgain()));
+    game.money = game.money.plus(calcMoneyGain().mul(calcRealDt(dt)));
     rainbowEffect("#money");
   } else {
     delRainbowEffect("#money");
@@ -487,7 +487,7 @@ function calcProgram() {
     shopBuy(5);
   }
   if (game.programActive[6]) {
-    game.durability = game.durability.sub(getOverclockPower().add(1).log(2).div(D.pow(1.1, game.researchLevel[4])).div(1000).mul(calcRealTgain()));
+    game.durability = game.durability.sub(getOverclockPower().add(1).log(2).div(D.pow(1.1, game.researchLevel[4])).div(1000).mul(calcRealDt(dt)));
 
     // minus bug fix
     if (game.durability.lte(0.01)) game.durability = D(0);

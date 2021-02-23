@@ -55,15 +55,15 @@ function renderInfo() {
   renderOverclockInfo();
   renderSingularityInfo();
 }
-function calcAll() {
+function calcAll(dt=0) {
   calcToggleTabs();
 
   game.mDigits = calcMaxDigit();
 
-  calcSingularity();
-  calcQuantum();
-  calcProgram();
-  calcResearch();
+  calcSingularity(dt);
+  calcQuantum(dt);
+  calcProgram(dt);
+  calcResearch(dt);
   calcAchievements();
 }
 

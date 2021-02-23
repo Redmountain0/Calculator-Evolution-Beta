@@ -169,9 +169,9 @@ function renderSingularity() {
   [...document.getElementsByClassName("wormholeChallengeGoal")].forEach((ele, idx) => ele.innerHTML = `Goal: ${dNotation(calcChallengeGoal(idx), 4, 0)} QL`);
   $("#exitChallenge").style.display = game.challengeEntered == -1 ? "none" : "block";
 }
-function calcSingularity() {
+function calcSingularity(dt) {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
-  for (var i in game.singularityGrid) game.singularityGrid[i].update();
+  for (var i in game.singularityGrid) game.singularityGrid[i].update(dt);
   for (var i in mergerWorks) mergerWorks[i] = [...new Set(mergerWorks[i])];
   if (game.achievements.includes(33)) game.singularityPower = game.singularityPower.add(calcSingularityPowerGain().mul(tGain/10));
   if (game.challengeEntered != -1) {
@@ -368,8 +368,8 @@ function canJoinWormholeChallenge() {
 function canEnterWoemholeChallenge() {
   return game.t4resets.gte(calcWormholeChallengeReq());
 }
-function calcRealTgain() {
-  return tGain*singularityBoosts.SpeedBoost.toNumber()*(game.achievements.includes(37)?2:1);
+function calcRealDt(dt=0) {
+  return dt*singularityBoosts.SpeedBoost.toNumber()*(game.achievements.includes(37)?2:1);
 }
 function calcChallengeDone() {
   return game.wormholeChallengeProgress.reduce((a, b) => a + b, 0);
@@ -426,13 +426,13 @@ class SingularityMachine {
     this.value = attrs.value;
   }
 
-  update () {
+  update (dt) {
     if (isProcessExceed() && !game.quantumUpgradeBought.includes('47')) return 0;
     var power = this.getPower();
     if (typeof this.getPointedMachine() == "undefined") return 0;
     switch (this.type) {
       case "Incrementer":
-      this.getPointedMachine().value = this.getPointedMachine().value.add(power.mul(calcRealTgain()));
+      this.getPointedMachine().value = this.getPointedMachine().value.add(power.mul(calcRealDt(dt)));
         break;
       case "Merger":
         var m = [...new Set(mergerWorks[this.position.x + '' + this.position.y])];
