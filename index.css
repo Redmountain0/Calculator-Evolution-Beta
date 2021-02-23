@@ -672,7 +672,7 @@ body {
   animation: quarkGlow ease 10s infinite;
 }
 #quantumUpgrades {
-  --s: min(50vw, 50vh); --n: 6; --s2: calc(var(--s) / var(--n) * 8 / 10 - 0.4vh); --m: calc(var(--s) / var(--n) / 10);
+  --s: min(50vw, 50vh); --n: 7; --s2: calc(var(--s) / var(--n) * 8 / 10 - 0.4vh); --m: calc(var(--s) / var(--n) / 10);
   margin: 1vh auto;
   width: var(--s); height: var(--s);
 }
