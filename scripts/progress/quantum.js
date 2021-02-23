@@ -290,7 +290,7 @@ function calcQuantumLabGain() {
   return labGain.floor(0);
 }
 function dokeepMilestone() {
-  for (let i = 0, l = calcMilestoneDone(); i < l; i++) game.quantumUpgradeBought.push('6' + (i+1));
+  for (let i = 0, l = calcMilestoneDone(); i < l; i++) if (!game.quantumUpgradeBought.includes('6' + (i+1))) game.quantumUpgradeBought.push('6' + (i+1));
 }
 
 function calcQubitSpeed() {
