@@ -110,8 +110,8 @@
   document.onmouseup = function() {documentHold = 0};
 
   // theme init
-  themeUrls = ['./themes/none.css', './themes/compact.css', './themes/aqua.css'];
-  themeName = ["Default", "Compact", "Aqua"];
+  themeUrls = ['./themes/none.css', './themes/compact.css', './themes/aqua.css', './themes/magenta.css'];
+  themeName = ["Default", "Compact", "Aqua", "Magenta (by RedMountain)"];
   var link = document.createElement( "link" );
   link.id = "compactCssElement";
   link.href = `./themes/none.css`;

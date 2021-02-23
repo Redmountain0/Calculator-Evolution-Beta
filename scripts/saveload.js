@@ -63,7 +63,7 @@ function save(c=1) {
 }
 function load(c=1) {
   // type fix
-  // Number -> Deciamal
+  // Number(string) -> Deciamal
   for (const i in tempGame) {
     if (tempGame[i] instanceof Decimal) {
       game[i] = D(tempGame[i]);
@@ -85,7 +85,7 @@ function load(c=1) {
       }
     }
   }
-  // singularityGrid
+  // Obj -> SingularityMachine
   for (var i in game.singularityGrid) {
     game.singularityGrid[i] = new SingularityMachine(game.singularityGrid[i]);
     game.singularityGrid[i].value = D(game.singularityGrid[i].value);
@@ -99,6 +99,9 @@ function load(c=1) {
       game.researchProgress.push(0);
     }
   }
+
+  // offline progress delete
+  if (!game.optionToggle[2]) game.tLast = new Date().getTime();
 
   if (c) commandAppend('load', 70);
 }
