@@ -83,7 +83,7 @@
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
     row7cost: [160, 480, 900, 2400, 7800, 23230, 56780]
   };
-  qUpgradeRendered = {a30: true, bought: []};
+  qUpgradeRendered = {a30: true, bought: [], force: false};
 
   // upgrade node init
   for (var i = 0; i < qUpgradeData.count; i++) {
@@ -95,7 +95,6 @@
     upNode.onmouseover = new Function(`displayQuantumUpgradeDesc.bind(this)(${i})`);
     upNode.onmouseout = new Function(`hideQuantumUpgradeDesc()`);
 
-    //upNode.onclick = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
     upNode.onmousedown = new Function(`buyQuantumUpgrade.bind(this)(${i})`);
     $('#quantumUpgrades').append(upNode);
   }
@@ -134,14 +133,15 @@ function renderQunatum() {
     }
   }
 
-  if (qUpgradeRendered.bought.toString() != game.quantumUpgradeBought.toString()) {
+  if (qUpgradeRendered.bought.toString() != game.quantumUpgradeBought.toString() || qUpgradeRendered.force) {
+    qUpgradeRendered.force = 0;
     qUpgradeRendered.bought = [...game.quantumUpgradeBought];
+
     var qUpgradeNodes = document.getElementsByClassName("quantumUpgrade");
     // fill bought upgrades
     for (var i = 0; i < qUpgradeData.count; i++) qUpgradeNodes[i].classList[(game.quantumUpgradeBought.includes((i%qUpgradeData.col+1) + '' + (Math.floor(i/qUpgradeData.row)+1)) ? 'add' : 'remove')]("bought");
     // automate toggle opacity
     for (var i = 0; i < qUpgradeData.row; i++) qUpgradeNodes[4+i*qUpgradeData.col].classList[(game.quantumUpgradeBought.includes(((4+i*qUpgradeData.col)%qUpgradeData.col+1) + '' + Math.floor((4+i*qUpgradeData.col)/qUpgradeData.row+1)) && !game.quantumAutomateToggle[i] ? 'add' : 'remove')]("deactivated");
-  
   }
   
   var qLabGain = calcQuantumLabGain();
@@ -189,7 +189,7 @@ function hideQuantumUpgradeDesc() {
 function buyQuantumUpgrade(idx) {
   setTimeout( function() {
     var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
-    ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1)) ) {
+    ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1)) && !t) {
       // buy
       game.quantumUpgradeBought.push((fixedIdx[1]+1) + '' + (fixedIdx[0]+1));
       if (idx == 3) game.researchLevel[1] = Math.max(2, game.researchLevel[1]);
@@ -199,6 +199,7 @@ function buyQuantumUpgrade(idx) {
       // auto toggle
       if (!game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) break ifStat;
       game.quantumAutomateToggle[fixedIdx[0]] ^= 1;
+      qUpgradeRendered.force = true;
     }
   }, 0); // timeout to prevent multi buy
 }
