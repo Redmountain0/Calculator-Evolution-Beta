@@ -122,14 +122,14 @@
 })();
 
 function renderBasic() {
-  $("#basedNumber").innerHTML = formatWithBase(game.number, game.base, game.digits, 1, 80);
+  $("#basedNumber").innerHTML = formatWithBase(game.number, game.base, game.digits, 1, 60);
   $("#money").innerHTML = dNotation(game.money, 5);
   tempRes = ` <span style="filter: grayscale(${!game.programActive[1]*1})">(+${dNotation(calcMoneyGain(), 2, 2).padEnd(7, 'B').replace(/B/g, "&nbsp;")}$/s)</span>`;
   if (game.t2toggle) tempRes += ` | ${dNotation(game.researchPoint, 4, 0)} RP\n`;
   if (game.t3toggle) tempRes += ` | ${dNotation(game.qubit, 4, 0)} Qubit , ${dNotation(game.quantumLab, 4, 0)} Lab\n`;
   if (game.t4toggle) tempRes += ` | ${dNotation(game.singularityPower, 4, 0)} SP\n`;
   $("#otherRes").innerHTML = tempRes;
-  $("#memoryDigit").innerHTML = ("").padStart(Math.min(100, dNum(game.mDigits)-dNum(game.digits)), 0);
+  $("#memoryDigit").innerHTML = ("").padStart(Math.min(80, dNum(game.mDigits)-dNum(game.digits)), 0);
   $("#numberBase").innerHTML = game.base;
 
   // tabs

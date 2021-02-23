@@ -85,6 +85,7 @@ function researchBuy(num) {
   }
 }
 function researchMaxBuy(num) {
+  if (game.researchPoint.lte(calcResearchCost(num, 0, game.researchSpeed[num]+1)) || (!game.quantumUpgradeBought.includes('25') && game.money.lte(calcResearchCost(num, 1, game.researchSpeed[num]+1)))) return;
   var mPoint = 20, eachMax = [2**mPoint, 2**mPoint];
   for (var i = 0; i < 2-game.quantumUpgradeBought.includes('25'); i++) {
     for (var j = 0; j < mPoint; j++) {
