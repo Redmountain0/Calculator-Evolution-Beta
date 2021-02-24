@@ -137,6 +137,7 @@ function hsvToRgb(h, s, v) {
 window.onblur = () => blurSettings();
 function blurSettings() {
   keyDowns = {};
+  documentHold = 0;
 }
 
 //hotkey
