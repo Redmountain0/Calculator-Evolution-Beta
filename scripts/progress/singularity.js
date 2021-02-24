@@ -326,6 +326,7 @@ function renderGridSideInfo() {
   $("#singularityEffects").innerHTML = thingToWrite;
 }
 function singularityMachineSelect(idx) {
+  if (machineHave-clacMachineUsed(machineIdx[idx]) < 1) return;
   selectedMachine = selectedMachine != idx ? idx : -1;
 }
 
