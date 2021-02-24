@@ -37,7 +37,7 @@
       "You can bulk buy Research upgrades and Shop upgrades",
       "Generate RP per second based on Reboot cooldown (${dNotation(Math.floor(30*(1/calcRebootCooldown())*1000), 2, 0)}%)",
       "Reboot cooldown /10",
-      "<b>\"Base_Increaser.exe\"</b> will land you to <b>\"Maximum Base\"</b><br><b>\"Memory.exe\"</b> will land you to <b>\"Digits based on Number/s\"</b>",
+      "<b>\"Base_Increaser.exe\"</b> will land you to <b>\"Maximum Base\"</b><br>${calcMaxDigit().lte(2000)?'<b style=\"opacity: 0.6\">':''}<b>\"Memory.exe\"</b> will land you to <b>\"Digits based on Number/s\"</b>${calcMaxDigit().lte(2000)?'</b>':''}<br><b style=\"opacity: 0.6\">Memory.exe boost works if maximum digit is greater than 2000</b>",
       "Instant finish Qubit make if pending time is less than 7 mins",
       "Process exceed won't block anything"
     ],

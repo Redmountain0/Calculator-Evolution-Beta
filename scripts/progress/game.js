@@ -464,7 +464,7 @@ function calcProgram(dt=0) {
     if (game.number.gte(game.base.pow(game.digits).sub(1)) && game.digits.lt(game.mDigits)) {
       if (game.shopBought[4] < 1) game.number = game.number.sub(game.base.pow(game.digits).sub(1));
       game.digits = game.digits.plus(1);
-      if (game.quantumUpgradeBought.includes('45')) game.digits = D.min(D.max(game.digits, calcCPU().add(1).log(game.base)), calcMaxDigit());
+      if (game.quantumUpgradeBought.includes('45') && calcMaxDigit().gte(2000)) game.digits = D.min(D.max(game.digits, calcCPU().add(1).log(game.base)), calcMaxDigit());
     }
   }
   if (game.programActive[3]) {
