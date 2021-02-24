@@ -270,8 +270,10 @@ function singularityGridClick(x, y, side='l') {
       game.singularityGrid[x + '' + y] = new SingularityMachine({position: {x: x, y: y}, rotate: 0, tier: 0, type: thisName, value: D(1)});
       singularityMachineChanged();
     } else if (thisName == thisMachine.type) {
-      for (let i = 0; i < 1+keyDowns[16]*8; i++) {
-        if (machineHave-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) break f1;
+      for (let i = 0; i < 1+(keyDowns[16]?1:0)*8; i++) {
+        if (machineHave-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) {
+          break f1;
+        }
         game.singularityGrid[x + '' + y].tier++;
       }
     } else {

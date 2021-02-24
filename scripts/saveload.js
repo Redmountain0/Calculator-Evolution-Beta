@@ -103,6 +103,9 @@ function load(c=1) {
   // offline progress delete
   if (!game.optionToggle[2]) game.tLast = new Date().getTime();
 
+  // bug fix
+  game.quantumUpgradeBought = [...new Set(game.quantumUpgradeBought)]
+
   if (c) commandAppend('load', 70);
 }
 function hardReset() {

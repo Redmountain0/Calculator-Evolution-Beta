@@ -13,8 +13,8 @@
     'Reach ${formatWithBase(63, game.base)}(${dNotation(game.base, 4, 0)})',
     'Have a ${dNotation(1, 0, 0)} $<br>Reward: Multiply mine power by x1.25',
     'Buy ${game.shopBought[5]}/${dNotation(3, 0, 0)} CPU upgrade',
-    'Reach base ${dNotation(10, 0, 0)}',
-    'Reach base ${dNotation(36, 0, 0)}<br>Reward: Shop cost x${dNotation(0.95, 0, 2)}',
+    'Reach base ${dNotation(game.base, 4, 0)}/${dNotation(10, 0, 0)}',
+    'Reach base ${dNotation(game.base, 4, 0)}/${dNotation(36, 0, 0)}<br>Reward: Shop cost x${dNotation(0.95, 0, 2)}',
 
     'Perform Reboot',
     'Reach Bonus CPU Level ${game.researchLevel[0]}/${dNotation(3, 0, 0)}',
@@ -35,7 +35,7 @@
     'Have ${dNotation(game.qubit, 4, 0)}/${dNotation(50, 4, 0)} Qubits<br>Reward: Qubit production speed x1.5',
 
     'Have ${dNotation(game.money)}/${dNotation("1e1000", 0, 0)} $<br>Reward: Multiply mine power by x10',
-    'Reach base ${dNotation(250, 4, 0)}<br>Reward: Shop cost /10',
+    'Reach base ${dNotation(game.base, 4, 0)}/${dNotation(250, 4, 0)}<br>Reward: Shop cost /10',
     'Have ${dNotation(game.researchPoint, 4, 0)}/${dNotation(D(2).pow(1024), 6, 0)} RP<br>Reward: Start Quantum run with 100 RP',
     'Have ${dNotation(game.qubit, 4, 0)}/${dNotation(1024, 4, 0)} Qubits',
     'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(82, 0, 0)} Labs<br>Reward: Shift Qubit production by +2QL',
@@ -47,9 +47,9 @@
     'Complete ${dNotation(calcChallengeDone(), 0, 0)}/${dNotation(10, 0, 0)} Challenges<br>Reward: All Challenge requirement -2<br>Can bulk complete Challenge',
 
     'Buy all Quantum Upgrades<br>Reward: More Quantum Upgrades',
-    'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(200, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed Challenge Completions (^${1+calcChallengeDone()/200})',
+    'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(200, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed based on Challenge Completions (^${1+calcChallengeDone()/200})',
     'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL',
-    'Go Singularity in ${game.t4resetTime} / 500 milliseconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space<br>Generate 10% of SP gain per second',
+    'Go Singularity in ${game.t4resetTime}/500 milliseconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space<br>Generate 10% of SP gain per second',
     'Go singularity ${dNotation(game.t4resets, 0, 0)}/${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
 
     'Have ${dNotation(game.qubit, 4, 0)}/${dNotation(10e3, 4, 0)} Qubits',
