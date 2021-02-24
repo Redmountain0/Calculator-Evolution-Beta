@@ -271,10 +271,9 @@ function singularityGridClick(x, y, side='l') {
       singularityMachineChanged();
     } else if (thisName == thisMachine.type) {
       for (let i = 0; i < 1+(keyDowns[16]?1:0)*8; i++) {
-        if (machineHave-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) {
-          break f1;
-        }
+        if (machineHave-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1 || thisMachine.tier >= 9) break f1;
         game.singularityGrid[x + '' + y].tier++;
+        if (machineHave-clacMachineUsed(thisName) < 1) selectedMachine = -1;
       }
     } else {
       thisMachine.rotate = (thisMachine.rotate+1)%4;
