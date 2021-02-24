@@ -308,12 +308,13 @@ function renderGridSideInfo() {
       if (thisData.hasValue != false) thingToWrite += `<br>> Power: ${dNotation(thisMachine.getPower(), 4, 2)}`;
       if (thisData.hasBoost) thingToWrite += `<br>&nbsp;> Boost: ${thisMachine.getBoostString()}`;
     } else if (typeof mergerWorks[gridOn.x + '' + gridOn.y] != "undefined") {
-      var m = mergerWorks[gridOn.x + '' + gridOn.y];
+      var m = [...new Set(mergerWorks[gridOn.x + '' + gridOn.y])];
       thingToWrite += "<br><br>Boost List<br>---------------";
       for (var i = 0; i < m.length; i++) {
         var tempMachine = game.singularityGrid[m[i]];
+        if (tempMachine.type == "Merger") continue;
         var tempData = singularityMachineData[tempMachine.type];
-        if (tempData.hasBoost != false) thingToWrite += `<br><span style="color: ${tempData.color}; text-shadow: 0 0 1vh ${tempData.color}; filter: brightness(1.8);">${tempMachine.getBoostString()}</span>`;
+        if (tempData.hasBoost != false) thingToWrite += `<br><span style="color: ${tempData.color}; text-shadow: 0 0 1vh ${tempData.color}; filter: brightness(1.8);">${tempMachine.getBoostString(m.concat([gridOn.x + '' + gridOn.y]))}</span>`;
       }
     }
     if (gridEditing) {
@@ -448,7 +449,7 @@ class SingularityMachine {
             var tempMachine = game.singularityGrid[m[i]];
             var tempData = singularityMachineData[tempMachine.type];
             if (typeof singularityBoosts[tempMachine.type] == "undefined") continue;
-            singularityBoosts[tempMachine.type] = singularityBoosts[tempMachine.type][tempData.boostType](tempMachine.getBoost());
+            singularityBoosts[tempMachine.type] = singularityBoosts[tempMachine.type][tempData.boostType](tempMachine.getBoost(m.concat([this.position.x + '' + this.position.y])));
           }
           break;
         }
@@ -493,8 +494,10 @@ class SingularityMachine {
   getPointed = () => {return this.rotate%2 ? (this.position.x+(this.rotate-2)) + '' + this.position.y : this.position.x + '' + (this.position.y-(this.rotate-1))};
   getPointedMachine = () => {return game.singularityGrid[this.getPointed()]};
 
-  getPower () {
-    var power = this.value.mul(D(1e4).pow(this.tier));
+  getPower (mergerExtra=[]) {
+    var tempValue = this.value;
+    if (mergerExtra) for (var i = 0, l = mergerExtra; i < mergerExtra.length; i++) if (game.singularityGrid[mergerExtra[i]].type == "Merger") tempValue = tempValue.add(game.singularityGrid[mergerExtra[i]].value);
+    var power = tempValue.mul(D(1e4).pow(this.tier));
     var iMachines = this.getInteracts();
     if (this.type != "Booster") for (var i = 0, l = iMachines.length; i < l; i++) if (iMachines[i].type == "Booster") power = power.mul(iMachines[i].getPower());
     power = power.pow(this.tier/15+0.5);
@@ -502,8 +505,8 @@ class SingularityMachine {
     return power;
   }
 
-  getBoost() {
-    var power = this.getPower();
+  getBoost(mergerExtra=[]) {
+    var power = this.getPower(mergerExtra);
     var value = this.value;
     var effect = D(0);
     switch (this.type) {
@@ -531,8 +534,8 @@ class SingularityMachine {
     }
     return effect;
   }
-  getBoostString() {
-    var boostNum = this.getBoost();
+  getBoostString(mergerExtra=[]) {
+    var boostNum = this.getBoost(mergerExtra);
     var tempObj = singularityMachineData[this.type];
     return tempObj.name + ' ' + (tempObj.boostType == "mul" ? 'x' : '+') + dNotation(boostNum, 4, 2);
   }
