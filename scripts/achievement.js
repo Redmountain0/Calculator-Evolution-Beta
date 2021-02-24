@@ -63,7 +63,7 @@ function calcAchievements() {
   }
 
   if (achTxt != '') {
-    commandAppend(`Got an Achievement: ${achTxt}`, -40)
+    commandAppend(`Got an Achievement: ${achTxt.replace(/<br>\*/, '')}`, -40);
   }
 }
 function renderAchievements() {
