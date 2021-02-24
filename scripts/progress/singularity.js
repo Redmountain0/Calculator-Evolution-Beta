@@ -9,7 +9,7 @@
     QubitBoost: {color: "#630b56", name: "Qubit", hasBoost: true, boostType: "mul", challengeIdx: 6, idx: 6},
     Incrementer: {color: "#0b3763", name: "Incrementer", hasBoost: false, idx: 7},
     Booster: {hasArrow: false, color: "#808080", name: "Booster", hasBoost: true, challengeIdx: 7, idx: 8},
-    Merger: {hasTier: false, hasValue: false, color: "#000000", name: "Merger", hasBoost: false, idx: 9},
+    Merger: {hasTier: false, color: "#000000", name: "Merger", hasBoost: false, idx: 9},
     Output: {hasArrow: false, hasTier: false, hasValue: false, name: "Output", hasBoost: false, idx: 10}
   }
   machineIdx = ["BaseBoost", "DigitBoost", "MoneyBoost", "RpBoost", "ResearchSpeedBoost", "SpeedBoost", "QubitBoost", "Incrementer", "Booster", "Merger", "Output"];
@@ -139,6 +139,8 @@
   singularityBoosts = {};
   mergerWorks = {};
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
+
+  gridTestMode = 0;
 })();
 
 // basic
@@ -231,6 +233,7 @@ function singularityMachineChanged() {
   mergerWorks = {};
 }
 function getSingularityMachineHave(name) {
+  if (gridTestMode) return 25;
   if (challengeIdx.includes(name)) {
     return game.wormholeChallengeProgress[singularityMachineData[name].challengeIdx]+(name=="MoneyBoost");
   }
@@ -268,6 +271,7 @@ function singularityGridClick(x, y, side='l') {
     if (typeof thisMachine == "undefined") {
       if (selectedMachine == -1 || machineHave-clacMachineUsed(thisName) < 1 || calcProcessLeft() < 1) break f1;
       game.singularityGrid[x + '' + y] = new SingularityMachine({position: {x: x, y: y}, rotate: 0, tier: 0, type: thisName, value: D(1)});
+      if (machineHave-clacMachineUsed(thisName) < 1) selectedMachine = -1;
       singularityMachineChanged();
     } else if (thisName == thisMachine.type) {
       for (let i = 0; i < 1+(keyDowns[16]?1:0)*8; i++) {
@@ -347,6 +351,7 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
   return tempSpGain4;
 }
 function calcGridOpened() {
+  if (gridTestMode) return 25;
   return Math.min(25, 4+Math.floor((calcChallengeDone()+3)/4));
 }
 function clacMachineUsed(name) {
@@ -398,7 +403,7 @@ function calcChallengeGoal(idx, lv=game.wormholeChallengeProgress[idx]) {
       goal = D(50).add(10*lv);
       break;
     case 6:
-      goal = D(80).add((10+lv)*lv);
+      goal = D(73).add((10+lv)*lv);
       break;
     case 7:
       goal = D(Infinity).add((7+lv**2)*lv);
@@ -464,7 +469,7 @@ class SingularityMachine {
               if (!singularityMachineData[this.type].hasBoost) return 0;
               mergerWorks[p].push(this.position.x + '' + this.position.y);
             } else if (typeof mergerWorks[this.position.x + '' + this.position.y] != "undefined") {
-              mergerWorks[p] = mergerWorks[p].concat(mergerWorks[this.position.x + '' + this.position.y]);
+              mergerWorks[p] = [...new Set(mergerWorks[p].concat(mergerWorks[this.position.x + '' + this.position.y]).concat([this.position.x + '' + this.position.y]))];
             }
             break;
         }
