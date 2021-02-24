@@ -133,9 +133,15 @@ function hsvToRgb(h, s, v) {
   return '#' + Math.floor(r*255).toString(16).padStart(2, Math.floor(r*255).toString(16)) + Math.floor(g*255).toString(16).padStart(2, Math.floor(g*255).toString(16)) + Math.floor(b*255).toString(16).padStart(2, Math.floor(b*255).toString(16));
 }
 
+// idk how to call these lol
+window.onblur = () => blurSettings();
+function blurSettings() {
+  keyDowns = {};
+}
+
 //hotkey
 (function(){
-  keyDowns = {16: 0};
+  keyDowns = {};
   document.addEventListener('keydown', function(e){
     const keyCode = e.keyCode;
     keyDowns[keyCode] = true;
