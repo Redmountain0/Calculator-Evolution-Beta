@@ -141,3 +141,7 @@ function undoGame() {
   }
   setTheme();
 }
+
+function openSavefileList() {
+  
+}

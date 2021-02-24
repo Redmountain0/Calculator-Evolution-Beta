@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animation.css?ver=1.1.b42">
-    <link rel="stylesheet" href="index.css?ver=1.1.b42">
+    <link rel="stylesheet" href="animation.css?ver=1.1.b43">
+    <link rel="stylesheet" href="index.css?ver=1.1.b43">
     <script src="./scripts/decimalMin.js"></script>
-    <script src="./scripts/index.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/numberFunc.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/achievement.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/progress/game.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/progress/reboot.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/progress/quantum.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/progress/singularity.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/saveload.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/loop.js?ver=1.1.b42" defer></script>
-    <script src="./scripts/reset.js?ver=1.1.b42" defer></script>
-    <title>Calculator Evolution v1.1.b42</title>
+    <script src="./scripts/index.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/numberFunc.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/achievement.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/progress/game.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/progress/reboot.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/progress/quantum.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/progress/singularity.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/saveload.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/loop.js?ver=1.1.b43" defer></script>
+    <script src="./scripts/reset.js?ver=1.1.b43" defer></script>
+    <title>Calculator Evolution v1.1.b43</title>
   </head>
   <body>
     <div id="warpAll">
@@ -419,6 +419,10 @@
           <br>
           <div id="themeBtn" class="optionBtn" onclick="game.theme=(game.theme+1)%themeUrls.length;setTheme();">Theme: None</div>
           <br>
+          <div class="optionBtn" onclick="openSavefileList()" style="display: none;">
+            Savefiles
+          </div>
+          <br style="display: none;">
           <div class="optionBtn" onclick="exportGame()">
             Export
           </div>
@@ -538,6 +542,9 @@
       </div>
       <div id="debugInfoArea">
         TPS: 0
+      </div>
+      <div id="savelistArea">
+        
       </div>
     </div>
   </body>
