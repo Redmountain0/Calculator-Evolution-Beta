@@ -19,7 +19,7 @@
       "Boost Research speed based on Time spent on this quantum and RP (x${dNotation(D(2).pow(D(game.tLast-game.quantumTime).pow(0.2)).pow(D.min(10, D.max(1, game.researchPoint.log(10).div(20)))), 4, 2)})",
       "Remove money requirement from research",
       "Research levels boosts RP gain (x${dNotation(game.researchLevel.reduce((a, b) => a.mul(b**2+1), D(1)).pow(3), 4, 1)})<br>And sqrt Quantum Lab Money req",
-      "Coming Soon!"
+      "Multiply research upgrade effect by x4 (x${!game.quantumUpgradeBought.includes('27') ? dNotation(calcPerResearchSpeedBase(), 4, 0) : dNotation(calcPerResearchSpeedBase().div(4), 4, 0)} -> x${!game.quantumUpgradeBought.includes('27') ? dNotation(calcPerResearchSpeedBase().mul(4), 4, 0) : dNotation(calcPerResearchSpeedBase(), 4, 0)})"
     ],
     // 3: Quantum
     [
