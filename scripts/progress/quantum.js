@@ -106,6 +106,7 @@ function quantum() {
 
   // give quantum lab
   game.quantumLab = game.quantumLab.add(calcQuantumLabGain());
+  game.maxQuantumLab = D.max(game.maxQuantumLab, game.quantumLab);
   commandAppend(`Built your ${ordNum(game.quantumLab)} Quantum Lab!`, 161, 1);
 
   game.t3resets = game.t3resets.add(1);
@@ -187,21 +188,19 @@ function hideQuantumUpgradeDesc() {
   $("#quantumUpgradeDesc").style.opacity = 0;
 }
 function buyQuantumUpgrade(idx) {
-  setTimeout( function() {
-    var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
-    ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) {
-      // buy
-      game.quantumUpgradeBought.push((fixedIdx[1]+1) + '' + (fixedIdx[0]+1));
-      if (idx == 3) game.researchLevel[1] = Math.max(2, game.researchLevel[1]);
-      calcQuantum();
-      renderQunatum();
-    } else if (fixedIdx[1] == 4) {
-      // auto toggle
-      if (!game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) break ifStat;
-      game.quantumAutomateToggle[fixedIdx[0]] ^= 1;
-      qUpgradeRendered.force = true;
-    }
-  }, 0); // timeout to prevent multi buy
+  var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];
+  ifStat: if (game.qubit.sub(calcUsedQubit()).gte(getQuantumUpgradeCost(idx)) && !game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) {
+    // buy
+    game.quantumUpgradeBought.push((fixedIdx[1]+1) + '' + (fixedIdx[0]+1));
+    if (idx == 3) game.researchLevel[1] = Math.max(2, game.researchLevel[1]);
+    calcQuantum();
+    renderQunatum();
+  } else if (fixedIdx[1] == 4) {
+    // auto toggle
+    if (!game.quantumUpgradeBought.includes((fixedIdx[1]+1) + '' + (fixedIdx[0]+1))) break ifStat;
+    game.quantumAutomateToggle[fixedIdx[0]] ^= 1;
+    qUpgradeRendered.force = true;
+  }
 }
 function getQuantumUpgradeCost(idx) {
   var fixedIdx = [Math.floor(idx/qUpgradeData.row), idx%qUpgradeData.col];

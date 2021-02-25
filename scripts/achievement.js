@@ -48,7 +48,7 @@
 
     'Buy all Quantum Upgrades<br>Reward: More Quantum Upgrades',
     'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(200, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed based on Challenge Completions (^${1+calcChallengeDone()/200})',
-    'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL',
+    'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL (max. ${dNotation(game.maxQuantumLab, 4, 0)})',
     'Go Singularity in ${game.t4resetTime}/500 milliseconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space<br>Generate 10% of SP gain per second',
     'Go singularity ${dNotation(game.t4resets, 0, 0)}/${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
 

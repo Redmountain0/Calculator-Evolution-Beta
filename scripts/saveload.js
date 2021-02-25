@@ -32,6 +32,7 @@ tempGame = {
   t3toggle: 0,
   t3resets: D(0),
   quantumLab: D(0),
+  maxQuantumLab: D(0),
   qubit: D(0),
   qubitProgress: D(0),
   quantumUpgradeBought: [],
