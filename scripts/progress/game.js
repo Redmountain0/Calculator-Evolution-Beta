@@ -204,11 +204,11 @@ function renderBasicInfo() {
 }
 function renderStat() {
   $("#statsText").innerHTML = `You've played this game for ${timeNotation((new Date().getTime()-game.startTime)/1000)}`;
-  if (game.t2toggle) $("#statsText").innerHTML += `<br><br>You've done Reboot ${dNotation(game.t2resets)} times`;
+  if (game.t2toggle) $("#statsText").innerHTML += `<br><br>You've done Reboot ${dNotation(game.t2resets, 4, 0)} times`;
   if (game.t2toggle) $("#statsText").innerHTML += `<br>You spent ${timeNotation((new Date().getTime()-game.rebootTime)/1000)} in this Reboot`;
-  if (game.t3toggle) $("#statsText").innerHTML += `<br><br>You've done Quantum ${dNotation(game.t3resets)} times`;
+  if (game.t3toggle) $("#statsText").innerHTML += `<br><br>You've done Quantum ${dNotation(game.t3resets, 4, 0)} times`;
   if (game.t3toggle) $("#statsText").innerHTML += `<br>You spent ${timeNotation((new Date().getTime()-game.quantumTime)/1000)} in this Quantum`;
-  if (game.t4toggle) $("#statsText").innerHTML += `<br><br>You've done Singularity ${dNotation(game.t4resets)} times`;
+  if (game.t4toggle) $("#statsText").innerHTML += `<br><br>You've done Singularity ${dNotation(game.t4resets, 4, 0)} times`;
   if (game.t4toggle) $("#statsText").innerHTML += `<br>You spent ${timeNotation((new Date().getTime()-game.singularityTime)/1000)} in this Singularity`;
 }
 function renderCalcDebugInfo() {
