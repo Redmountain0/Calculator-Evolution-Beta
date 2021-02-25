@@ -69,8 +69,8 @@ function researchBuy(num) {
   if ((game.challengeEntered == 5 || game.challengeEntered == 7) && (num == 4 || num == 5)) return;
   if (((num == 3 || num == 4) && game.researchLevel[0] < 1)) return;
   if ((num == 5 && game.researchLevel[3] < 1)) return;
-  if (num == 6 && game.researchLevel[5] < 1 && (game.challengeEntered != 5 || game.challengeEntered == 7)) return;
-  if (num == 7 && game.researchLevel[6] < 1 && (game.challengeEntered != 5 || game.challengeEntered == 7)) return;
+  if (num == 6 && game.researchLevel[5] < 1 && (game.challengeEntered != 5 || game.challengeEntered != 7)) return;
+  if (num == 7 && game.researchLevel[6] < 1 && (game.challengeEntered != 5 || game.challengeEntered != 7)) return;
 
   if (game.quantumUpgradeBought.includes('42')) {
     researchMaxBuy(num);
