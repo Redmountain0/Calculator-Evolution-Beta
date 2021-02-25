@@ -49,7 +49,7 @@
       "Automate research buy second row",
       "Automate research buy third row",
       "Automate Quantum Lab",
-      "Coming Soon!"
+      "Automate Singularity"
     ],
     // 6: Keep
     [
@@ -79,7 +79,7 @@
     count: 49, col: 7, row: 7,
     row123cost: [2, 8, 18, 32, 48, 155, 1213],
     row4cost: [1, 5, 11, 20, 30, 97, 400],
-    row5cost: [1, 4, 10, 17, 26, 86, 220],
+    row5cost: [1, 4, 10, 17, 26, 86, 4000],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
     row7cost: [160, 480, 900, 2400, 7800, 23230, 56780]
   };
@@ -165,6 +165,7 @@ function calcQuantumAuto() {
   if (game.quantumUpgradeBought.includes('54') && game.quantumAutomateToggle[3] && (tickDone+1)%10 == 0) for (var i = 3; i < 6; i++) researchBuy(i);
   if (game.quantumUpgradeBought.includes('55') && game.quantumAutomateToggle[4] && (tickDone+2)%10 == 0) for (var i = 6; i < 8; i++) researchBuy(i);
   if (game.quantumUpgradeBought.includes('56') && game.quantumAutomateToggle[5]) quantum();
+  if (game.quantumUpgradeBought.includes('57') && game.quantumAutomateToggle[6]) singularity();
 }
 
 function displayQuantumUpgradeDesc(idx) {

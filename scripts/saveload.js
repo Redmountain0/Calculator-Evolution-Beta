@@ -37,7 +37,7 @@ tempGame = {
   qubitProgress: D(0),
   quantumUpgradeBought: [],
   quantumUpgradePreset: {},
-  quantumAutomateToggle: new Array(5).fill(1),
+  quantumAutomateToggle: new Array(7).fill(1),
   quantumTime: new Date().getTime(),
   t4toggle: 0,
   t4resets: D(0),
