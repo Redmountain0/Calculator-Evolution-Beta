@@ -285,6 +285,7 @@ function singularityGridClick(x, y, side='l') {
       singularityMachineChanged();
     }
   } else {
+    if (typeof game.singularityGrid[x + '' + y] == "undefined") break f1;
     delete game.singularityGrid[x + '' + y];
     singularityMachineChanged();
   }
