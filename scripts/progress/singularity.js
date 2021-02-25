@@ -255,7 +255,7 @@ function wormholeChallengeEnter(idx) {
     game.challengeEntered = idx;
     game.quantumUpgradeBought = [];
     singularityReset();
-    if (game.achievements.includes(32)) game.quantumLab = D.min(game.maxQuantumLab, calcChallengeGoal(idx).div(2));
+    if (game.achievements.includes(32)) game.quantumLab = D.min(game.maxQuantumLab, calcChallengeGoal(idx).div(2)).floor(0);
   }
 }
 function renderSingularityInfo() {
