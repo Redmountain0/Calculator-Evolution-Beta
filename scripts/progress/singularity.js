@@ -356,7 +356,9 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
 }
 function calcGridOpened() {
   if (gridTestMode) return 25;
-  return Math.min(25, 4+Math.floor((calcChallengeDone()+3)/4));
+  var tempSpace = Math.min(25, 4+Math.floor((calcChallengeDone()+3)/4));
+  if (game.achievements.includes(33)) tempSpace += 2;
+  return tempSpace;
 }
 function clacMachineUsed(name) {
   if (typeof name == "number") name = machineIdx[name];
