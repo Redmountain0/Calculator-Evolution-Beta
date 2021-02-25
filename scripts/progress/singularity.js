@@ -523,7 +523,7 @@ class SingularityMachine {
         effect = power.mul(power.add(1).log(10)).mul(value.add(1).log(10).pow(2)).add(1);
         break;
       case "RpBoost":
-        effect = D(1.01).pow(power.div(1e5).add(1).log(10).pow(2)).add(power.div(1e5).add(1).log(10).pow(2)).add(1);
+        effect = power.div(1e5).add(1).log(10).pow(2).add(1);
         break;
       case "ResearchSpeedBoost":
         effect = power.pow(0.8).add(1);
