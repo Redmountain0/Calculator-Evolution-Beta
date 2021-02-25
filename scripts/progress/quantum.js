@@ -29,7 +29,7 @@
       "Boost Qubit production speed based on Number (x${dNotation(D.min(game.number.add(1).log(10).div(10).sqrt(2), 1).add(1).pow(game.number.add(1).log(10).pow(0.6)), 4, 2)})",
       "Each bought Quantum Upgrade boosts Qubit gain by x10 (x${dNotation(D(10).pow([...new Set(game.quantumUpgradeBought)].length), 0)})",
       "You can bulk buy Quantum Labs<br>And extend the cap of Quantum II (${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap(), 4, 0) : dNotation(calcQuantum2Cap().div(5), 0, 1)} -> ${!game.quantumUpgradeBought.includes('36') ? dNotation(calcQuantum2Cap().mul(5), 0, 1) : dNotation(calcQuantum2Cap(), 0, 1)})",
-      "Coming Soon!"
+      "Extend the cap of Quantum II (${!game.quantumUpgradeBought.includes('37') ? dNotation(calcQuantum2Cap(), 4, 0) : dNotation(calcQuantum2Cap().div(2), 0, 1)} -> ${!game.quantumUpgradeBought.includes('37') ? dNotation(calcQuantum2Cap().mul(2), 0, 1) : dNotation(calcQuantum2Cap(), 0, 1)})"
     ],
     // 4: QoL
     [
@@ -272,6 +272,7 @@ function getMaxQuantumLabGain() {
 function calcQuantum2Cap() {
   var baseCap = D(200);
   if (game.quantumUpgradeBought.includes('36')) baseCap = baseCap.mul(5);
+  if (game.quantumUpgradeBought.includes('37')) baseCap = baseCap.mul(2);
   return baseCap;
 }
 function getQuantumReqPow() {
