@@ -365,7 +365,7 @@ function resetGame() {
 function calcCpuUpgradeEffect() {
   var eff = D(2);
   if (game.quantumUpgradeBought.includes('11')) eff = eff.mul(1.1);
-  if (game.challengeEntered == 2) eff = eff.pow(0.75);
+  if (game.challengeEntered == 2 || game.challengeEntered == 7) eff = eff.pow(0.75);
   return eff;
 }
 function calcCPU() {
@@ -411,14 +411,14 @@ function calcMaxDigit() {
   var tempNum = D(6);
   tempNum = tempNum.plus(game.researchLevel[2]);
   if (game.quantumUpgradeBought.includes('12')) tempNum = tempNum.plus(game.base.pow(0.6).floor());
-  if (game.challengeEntered == 1) tempNum = D.min(tempNum, 20);
+  if (game.challengeEntered == 1 || game.challengeEntered == 7) tempNum = D.min(tempNum, 20);
   tempNum = tempNum.add(singularityBoosts.DigitBoost);
   return tempNum.floor(0);
 }
 function calcMaxBase() {
   var tempNum = D(36);
   if (game.shopBought[0] >= 3) tempNum = tempNum.add(game.digits);
-  if (game.challengeEntered == 0) tempNum = D.min(50, tempNum);
+  if (game.challengeEntered == 0 || game.challengeEntered == 7) tempNum = D.min(50, tempNum);
   tempNum = tempNum.add(singularityBoosts.BaseBoost);
   return tempNum.floor(0);
 }
@@ -523,7 +523,7 @@ function calcMultiProcess() {
   if (game.achievements.includes(7)) maxProcess += 1;
   if (game.achievements.includes(34)) maxProcess += 10;
 
-  if (game.challengeEntered == 7) maxProcess = Math.floor(maxProcess/10);
+  maxProcess = Math.floor(maxProcess/10);
 
   return maxProcess;
 }
