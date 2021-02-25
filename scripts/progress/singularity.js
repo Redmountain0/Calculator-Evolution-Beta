@@ -164,7 +164,8 @@ function renderSingularity() {
   if (calcMilestoneDone() < 7) $("#singularityDesc").innerHTML += `<br>Have ${2**calcMilestoneDone()*2} SP to retain Keep ${romanize(calcMilestoneDone()+1).toUpperCase()}`;
   $("#wormholeChallengeWarp").style.display = game.t4resets.gte(2) ? "block" : "none";
   $("#gridReq").innerHTML = `Complete ${4-(calcChallengeDone()+3)%4} more challenge to unlock ${ordNum(calcGridOpened()+1)} Grid space`;
-  //$("#challengeReq").innerHTML = `Go singularity ${dNotation(game.t4resets.toNumber(), 4, 0)}/${calcWormholeChallengeReq()} times to enter Challenge (Increases per challenge complete)`;
+  $("#challengeRewardMachine").style.color = game.challengeEntered == -1 ? "inherit" : singularityMachineData[challengeIdx[game.challengeEntered]].color;
+  $("#challengeRewardMachine").style.textShadow = game.challengeEntered == -1 ? "inherit" : `0 0 0.3vh ${singularityMachineData[challengeIdx[game.challengeEntered]].color}`;
   [...document.getElementsByClassName("wormholeChallengeName")].forEach((ele, idx) => ele.innerHTML = `${singularityMachineData[challengeIdx[idx]].name} Challenge (${game.wormholeChallengeProgress[idx]}/10)`);
   [...document.getElementsByClassName("wormholeChallenge")].forEach((ele, idx) => ele.style.setProperty("--progress", `${10*game.wormholeChallengeProgress[idx]}%`));
   [...document.getElementsByClassName("wormholeChallengeEffect")].forEach((ele, idx) => ele.innerHTML = challengeDesc[idx]);
