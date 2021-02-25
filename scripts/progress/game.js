@@ -523,8 +523,6 @@ function calcMultiProcess() {
   if (game.achievements.includes(7)) maxProcess += 1;
   if (game.achievements.includes(34)) maxProcess += 10;
 
-  maxProcess = Math.floor(maxProcess/10);
-
   return maxProcess;
 }
 function calcProcessLeft() {
