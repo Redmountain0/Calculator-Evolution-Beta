@@ -63,12 +63,12 @@ function calcAll(dt=0) {
 
   game.mDigits = calcMaxDigit();
 
+  calcAchievements();
   calcInfinity();
   calcSingularity(dt);
   calcQuantum(dt);
   calcProgram(dt);
   calcResearch(dt);
-  calcAchievements();
 }
 
 //visual effect
