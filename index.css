@@ -940,6 +940,17 @@ body {
 .tab:nth-of-type(9) {
   text-align: center;
 }
+#ipDisplay {
+  margin-top: 1vh;
+  font-size: 3.6vh;
+  text-shadow: 0 0 1vh rgb(233, 163, 163), 0 0 0.5vh rgb(233, 163, 163);
+  animation: hueRotate ease 12s infinite;
+}
+#ipDesc {
+  font-weight: bold;
+  font-size: 1.8vh;
+  color: #fff;
+}
 
 #debugInfoArea {
   position: absolute;

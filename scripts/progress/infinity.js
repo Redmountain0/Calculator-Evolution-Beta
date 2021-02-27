@@ -4,7 +4,7 @@ function calcInfinity() {
 
 function infinity() {
     game.t5resets = game.t5resets.add(1);
-    game.infinityPoint = game.infinityPoint.add(D(5).add(6*3600*1000 / (new Date().getTime() - game.t5resetTime)).floor(0));
+    game.infinityPoint = game.infinityPoint.add(calcIpGain());
     game.t5resetTime = new Date().getTime();
     infinityReset();
 
@@ -13,4 +13,9 @@ function infinity() {
 
 function renderInfinity() {
     document.getElementById("ipDisplay").innerHTML = `You have ${dNotation(game.infinityPoint, 4, 0)} Infinity Point`;
+    document.getElementById("ipDesc").innerHTML = `If you go Infinity now, you'll get ${dNotation(calcIpGain(), 4, 0)} IP<br><br>Infinity upgrades coming soon :D`
+}
+
+function calcIpGain() {
+    return D(5).add((6*3600*1000)**2 / (new Date().getTime() - game.t5resetTime)**2).floor(0);
 }
