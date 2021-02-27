@@ -81,7 +81,7 @@
     row4cost: [1, 5, 11, 20, 30, 97, 400],
     row5cost: [1, 4, 10, 17, 26, 86, 4000],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
-    row7cost: [160, 4500, 24e3, 90e3, 100e3, 200e3, "Infinity"]
+    row7cost: [160, 4500, 24e3, 90e3, 100e3, 170e3, "Infinity"]
   };
   qUpgradeRendered = {a30: true, bought: [], force: false};
 
