@@ -48,6 +48,7 @@ tempGame = {
   singularityGridActivate: 0,
   singularityPower: D(0),
   wormholeChallengeProgress: new Array(8).fill(0),
+  challengeRecord: new Array(8).fill(D(0)),
   challengeEntered: -1,
   challengeTime: new Date().getTime(),
   b: 0
@@ -87,6 +88,9 @@ function load(c=1) {
         game[i] = tempLoad[i];
       }
     }
+  }
+  for (var i = 0, l = game.challengeRecord.length; i < l; i++) {
+    game.challengeRecord[i] = D(game.challengeRecord[i]);
   }
   // Obj -> SingularityMachine
   for (var i in game.singularityGrid) {

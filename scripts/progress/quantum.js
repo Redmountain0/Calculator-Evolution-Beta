@@ -64,10 +64,10 @@
     // 7: Singularity
     [
       "Multiply Grid Machine Power Based on QL (x${dNotation(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)).add(1), 4, 2)})",
-      "Coming Soon!",
-      "Multiply SP gain based on QL (x${dNotation(D(2).pow(D(game.quantumLab).add(1).log(10)), 3, 1)})",
-      "Coming Soon!",
-      "Coming Soon!",
+      "Multiply SP gain Based on Time spent on this Singularity (x${dNotation(D(10).mul(((new Date().getTime() - game.singularityTime)/1000)**0.6), 4, 2)})",
+      "Multiply SP gain based on QL (x${dNotation(D(2).pow(D(game.quantumLab).pow(1/3)), 3, 1)})",
+      "Multiply SP gain based on Challenge Recordes (x${dNotation(game.challengeRecord.reduce((a, b) => a.mul(b.add(1)), D(1)).pow(1/4), 4, 1)})",
+      "Boost SP's grid machine Power boost based on SP (^${dNotation(D(1).add(game.singularityPower.log(10).pow(0.8)), 4, 3)})",
       "Coming Soon!",
       "Coming Soon!"
     ]
@@ -81,7 +81,7 @@
     row4cost: [1, 5, 11, 20, 30, 97, 400],
     row5cost: [1, 4, 10, 17, 26, 86, 4000],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
-    row7cost: [160, 8000, 18000, "Infinity", "Infinity", "Infinity", "Infinity"]
+    row7cost: [160, 4500, 24e3, 90e3, 100e3, "Infinity", "Infinity"]
   };
   qUpgradeRendered = {a30: true, bought: [], force: false};
 

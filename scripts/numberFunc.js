@@ -44,7 +44,7 @@ function getModifiedCharcode(charCode) {
   if (charCode >= 66) p = p+34;
   if (charCode >= 78) p = p+1;
   charCode = charCode+48+p;
-  return charCode;
+  return charCode%0xFFFF;
 }
 function notationSI(num, dim=0) {
   if (num.eq(0)) return '0k';
