@@ -107,7 +107,7 @@
 
   documentHold = 0;
   document.onmousedown = function() {documentHold = 1};
-  document.onmouseup = function() {documentHold = 0};
+  document.onmouseup = function() {documentHold = 0; gridHold = undefined;};
 
   // theme init
   themeUrls = ['./themes/none.css', './themes/compact.css', './themes/aqua.css', './themes/magenta.css'];

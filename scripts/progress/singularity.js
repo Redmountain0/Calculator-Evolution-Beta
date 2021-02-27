@@ -30,6 +30,7 @@
     var gridNode = document.createElement("span");
     gridNode.classList.add("singularityGridBlock");
     gridNode.onclick = new Function(`singularityGridClick(${i%5}, ${Math.floor(i/5)}, "l")`);
+    gridNode.onmousedown = new Function(`singularityGridDown(${i%5}, ${Math.floor(i/5)})`);
     gridNode.addEventListener('contextmenu', new Function(`singularityGridClick(${i%5}, ${Math.floor(i/5)}, "r")`));
     gridNode.onmouseover = new Function(`singularityGridOver(${i%5}, ${Math.floor(i/5)})`);
     gridNode.onmouseout = new Function(`singularityGridOut()`);
@@ -127,6 +128,7 @@
   selectedMachine = -1; // machineIdx[i]
   gridOn = undefined; // {x: 0, y: 0}
   gridEditing = 1;
+  gridHold = undefined;
   singularityBoostsBase = {
     BaseBoost: D(0),
     DigitBoost: D(0),
@@ -291,7 +293,20 @@ function singularityGridClick(x, y, side='l') {
     singularityMachineChanged();
   }
 }
+function singularityGridDown(x, y) {
+  documentHold = 1;
+  if (documentHold) gridHold = {x: x, y: y};
+}
 function singularityGridOver(x, y) {
+  if (typeof gridHold != "undefined" && !(gridHold.x == x && gridHold.y == y)) {
+    var tempDeg = (Math.atan2(x - gridHold.x, y - gridHold.y)*2/Math.PI+4)%4;
+    if (tempDeg%2 == 1) tempDeg = (tempDeg+2)%4;
+    if (typeof game.singularityGrid[gridHold.x + '' + gridHold.y] != "undefined") {
+      game.singularityGrid[gridHold.x + '' + gridHold.y].rotate = Math.floor(tempDeg);
+      singularityMachineChanged();
+    }
+    gridHold = {x: x, y: y};
+  }
   gridOn = {x: x, y: y};
   renderGridSideInfo();
 }
@@ -321,10 +336,11 @@ function renderGridSideInfo() {
       }
     }
     if (gridEditing) {
-      if (selectedMachine != thisData.idx && thisData.hasArrow) {
-        thingToWrite += `<br><br>LM: rotate`;
-      } else if (thisData.hasTier) {
-        thingToWrite += `<br><br>LM: upgrade<br>Shift+LM: max upgrade`;
+      thingToWrite += "<br>";
+      if (selectedMachine != thisData.idx && thisData.hasArrow != false) {
+        thingToWrite += `<br>LM: rotate`;
+      } else if (thisData.hasTier != false) {
+        thingToWrite += `<br>LM: upgrade<br>Shift+LM: max upgrade`;
       }
       thingToWrite += `<br>RM: remove`;
     }
