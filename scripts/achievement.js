@@ -7,7 +7,7 @@
     'Richer<br>*', 'A to Œ<br>*', 'Infinity Research<br>*', 'Infinity Boost', '2 more?<br>*',
     'Singularity<br>*', 'Second Singularity<br>*', 'Challenge', 'Bulk QL Challenge<br>*', 'More Challenges<br>*',
     'Mastered<br>*', 'Give me more QUBIT!<br>*', 'Grid Lab<br>*', 'Singularity at light speed<br>*', 'Singularit<br>ies<br>*',
-    'Broken Machine', 'More Broken', 'Bugged Reality<br>*', 'Inf..', 'GG'
+    'Broken Machine', 'Tricky', 'Bugged Reality<br>*', 'Inf..', 'GG'
   ];
   achievementGoal = [
     'Reach ${formatWithBase(63, game.base)}(${dNotation(game.base, 4, 0)})',

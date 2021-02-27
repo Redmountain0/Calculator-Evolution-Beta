@@ -47,6 +47,9 @@ function renderAll() {
     case 7:
     renderSingularity();
       break;
+    case 8:
+      renderInfinity();
+      break;
   }
 }
 function renderInfo() {
@@ -60,6 +63,7 @@ function calcAll(dt=0) {
 
   game.mDigits = calcMaxDigit();
 
+  calcInfinity();
   calcSingularity(dt);
   calcQuantum(dt);
   calcProgram(dt);

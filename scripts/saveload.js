@@ -45,13 +45,15 @@ tempGame = {
   t4resetTime: 1e110,
   singularityTime: new Date().getTime(),
   singularityGrid: {},
-  singularityGridActivate: 0,
   singularityPower: D(0),
   wormholeChallengeProgress: new Array(8).fill(0),
   challengeRecord: new Array(8).fill(D(0)),
   challengeEntered: -1,
-  challengeTime: new Date().getTime(),
-  b: 0
+  b: 0,
+  infinityPoint: D(0),
+  t5toggle: 0,
+  t5resets: D(0),
+  t5resetTime: 0
 };
 game = {};
 

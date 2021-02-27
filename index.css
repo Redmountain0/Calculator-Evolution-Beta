@@ -111,6 +111,13 @@ body {
 .absoluteElement {
   position: absolute;
 }
+.t5Nav {
+  border: 0.35vh solid rgb(216, 89, 89);
+  background-color: #fff;
+  color: rgb(216, 89, 89);
+  cursor: pointer;
+  animation: hueRotate ease 8s infinite;
+}
 
 #commandArea {
   margin-left: 1.5vw;
@@ -928,6 +935,10 @@ body {
 #exitChallenge:active {
   transform: scale(1);
   transition: all 0s;
+}
+
+.tab:nth-of-type(9) {
+  text-align: center;
 }
 
 #debugInfoArea {

@@ -4,20 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animation.css?ver=1.1.b79">
-    <link rel="stylesheet" href="index.css?ver=1.1.b79">
+    <link rel="stylesheet" href="animation.css?ver=1.1.b80">
+    <link rel="stylesheet" href="index.css?ver=1.1.b80">
     <script src="./scripts/decimalMin.js"></script>
-    <script src="./scripts/index.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/numberFunc.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/achievement.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/progress/game.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/progress/reboot.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/progress/quantum.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/progress/singularity.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/saveload.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/loop.js?ver=1.1.b79" defer></script>
-    <script src="./scripts/reset.js?ver=1.1.b79" defer></script>
-    <title>Calculator Evolution v1.1.b79</title>
+    <script src="./scripts/index.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/numberFunc.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/achievement.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/progress/game.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/progress/reboot.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/progress/quantum.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/progress/singularity.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/progress/infinity.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/saveload.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/loop.js?ver=1.1.b80" defer></script>
+    <script src="./scripts/reset.js?ver=1.1.b80" defer></script>
+    <title>Calculator Evolution v1.1.b80</title>
   </head>
   <body>
     <div id="warpAll">
@@ -36,6 +37,7 @@
         <span class="tabNav t2Nav" onclick="goTab(2)">Research</span>
         <span class="tabNav t3Nav" onclick="goTab(5)" style="display: none;"><span>Quantum</span></span>
         <span class="tabNav t4Nav" onclick="goTab(7)" style="display: none;">Singularity</span>
+        <span class="tabNav t5Nav" onclick="goTab(8)" style="display: none;">Infinity</span>
       </div>
       <div id="tabs">
         <!-- Module -->
@@ -522,6 +524,12 @@
             <div id="exitChallenge" onclick="if(confirm('Are you sure to exit the challenge?')){game.challengeEntered = -1; singularityReset();}">
               Exit challenge
             </div>
+          </div>
+        </div>
+        <!-- Infinity -->
+        <div class="tab" style="display: none;">
+          <div id="ipDisplay" style="color: white;">
+            You have 0 Infinity Points
           </div>
         </div>
       </div>
