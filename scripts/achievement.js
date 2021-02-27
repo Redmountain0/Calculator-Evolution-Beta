@@ -47,7 +47,7 @@
     'Complete ${dNotation(calcChallengeDone(), 0, 0)}/${dNotation(10, 0, 0)} Challenges<br>Reward: All Challenge requirement -2<br>Can bulk complete Challenge',
 
     'Buy all Quantum Upgrades<br>Reward: More Quantum Upgrades',
-    'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(200, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed based on Challenge Completions (^${1+calcChallengeDone()/200})',
+    'Have ${dNotation(game.quantumLab, 0, 0)}/${dNotation(600, 0, 0)} Quantum Labs<br>Reward: Boost Qubit gain speed based on Challenge Completions (^${1+calcChallengeDone()/200})',
     'Complete Qubit Challenge once<br>Reward: Start challenge with half of goal QL (max. ${dNotation(game.maxQuantumLab, 4, 0)})',
     'Go Singularity in ${game.t4resetTime}/500 milliseconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space<br>Generate 10% of SP gain per second',
     'Go singularity ${dNotation(game.t4resets, 0, 0)}/${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
@@ -65,7 +65,7 @@
     'game.quantumLab.gte(1)', 'game.qubit.gte(10)', 'game.quantumUpgradeBought.length>=8', 'game.quantumLab.gte(7)', 'game.qubit.gte(50)',
     'game.money.gte(\'1e1000\')', 'game.base.gte(250)', 'game.researchPoint.gte(D(2).pow(1024))', 'game.qubit.gte(1024)', 'game.quantumLab.gte(82)',
     'game.t4resets.gte(1)', 'game.t4resets.gte(2)', 'calcChallengeDone() >= 1', 'calcQuantumLabGain().gte(20)', 'calcChallengeDone() >= 10',
-    'game.quantumUpgradeBought.length>=36', 'game.quantumLab.gte(200)', 'game.wormholeChallengeProgress[6]>=1', 'game.t4resetTime <= 500', 'game.t4resets.gte(100)',
+    'game.quantumUpgradeBought.length>=36', 'game.quantumLab.gte(600)', 'game.wormholeChallengeProgress[6]>=1', 'game.t4resetTime <= 500', 'game.t4resets.gte(100)',
     '0', 'game.wormholeChallengeProgress[7]>=1', 'game.money.gte("1e9000000000000")', '0', '0'
   ];
 })();
