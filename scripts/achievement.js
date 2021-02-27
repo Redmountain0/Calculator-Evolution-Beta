@@ -7,7 +7,7 @@
     'Richer<br>*', 'A to Œ<br>*', 'Infinity Research<br>*', 'Infinity Boost', '2 more?<br>*',
     'Singularity<br>*', 'Second Singularity<br>*', 'Challenge', 'Bulk QL Challenge<br>*', 'More Challenges<br>*',
     'Mastered<br>*', 'Give me more QUBIT!<br>*', 'Grid Lab<br>*', 'Singularity at light speed<br>*', 'Singularit<br>ies<br>*',
-    '2^10k', 'Broken Machine', 'Bugged Reality<br>*', 'Inf..', 'GG'
+    'None', 'Broken Machine', 'Bugged Reality<br>*', 'Inf..', 'GG'
   ];
   achievementGoal = [
     'Reach ${formatWithBase(63, game.base)}(${dNotation(game.base, 4, 0)})',
@@ -52,7 +52,7 @@
     'Go Singularity in ${game.t4resetTime}/500 milliseconds<br>Reward: 2 Merger Grid Machine<br>2 Grid Space<br>Generate 10% of SP gain per second',
     'Go singularity ${dNotation(game.t4resets, 0, 0)}/${dNotation(100, 0, 0)} times<br>Reward: SP gain x4<br>10 extra process',
 
-    'Have ${dNotation(game.qubit, 4, 0)}/${dNotation(10e3, 4, 0)} Qubits',
+    'None',
     'Complete Boost Challenge once',
     'Reach Infinity$<br>Reward: Game speed x2',
     'Go Infinity in 5 hours',
@@ -66,7 +66,7 @@
     'game.money.gte(\'1e1000\')', 'game.base.gte(250)', 'game.researchPoint.gte(D(2).pow(1024))', 'game.qubit.gte(1024)', 'game.quantumLab.gte(82)',
     'game.t4resets.gte(1)', 'game.t4resets.gte(2)', 'calcChallengeDone() >= 1', 'calcQuantumLabGain().gte(20)', 'calcChallengeDone() >= 10',
     'game.quantumUpgradeBought.length>=36', 'game.quantumLab.gte(200)', 'game.wormholeChallengeProgress[6]>=1', 'game.t4resetTime <= 500', 'game.t4resets.gte(100)',
-    'game.qubit.gte(10e3)', 'game.wormholeChallengeProgress[7]>=1', 'game.money.gte("1e9000000000000")', '0', '0'
+    '0', 'game.wormholeChallengeProgress[7]>=1', 'game.money.gte("1e9000000000000")', '0', '0'
   ];
 })();
 
