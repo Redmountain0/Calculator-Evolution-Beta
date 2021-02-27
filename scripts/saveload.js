@@ -49,7 +49,8 @@ tempGame = {
   singularityPower: D(0),
   wormholeChallengeProgress: new Array(8).fill(0),
   challengeEntered: -1,
-  challengeTime: new Date().getTime()
+  challengeTime: new Date().getTime(),
+  b: 0
 };
 game = {};
 
@@ -101,12 +102,17 @@ function load(c=1) {
       game.researchProgress.push(0);
     }
   }
+  if (game.b == 0) {
+    game.quantumUpgradeBought = [];
+    dokeepMilestone();
+    game.b++;
+  }
 
   // offline progress delete
   if (!game.optionToggle[2]) game.tLast = new Date().getTime();
 
   // bug fix
-  game.quantumUpgradeBought = [...new Set(game.quantumUpgradeBought)]
+  game.quantumUpgradeBought = [...new Set(game.quantumUpgradeBought)];
 
   if (c) commandAppend('load', 70);
 }

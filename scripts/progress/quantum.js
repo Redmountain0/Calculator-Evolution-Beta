@@ -65,10 +65,10 @@
     [
       "Multiply Grid Machine Power Based on QL (x${dNotation(D(1.01).pow(game.quantumLab).mul(game.quantumLab.pow(2)).add(1), 4, 2)})",
       "Coming Soon!",
-      "Coming Soon!",
-      "Coming Soon!",
-      "Coming Soon!",
       "Multiply SP gain based on QL (x${dNotation(D(2).pow(D(game.quantumLab).add(1).log(10)), 3, 1)})",
+      "Coming Soon!",
+      "Coming Soon!",
+      "Coming Soon!",
       "Coming Soon!"
     ]
   ];
@@ -81,7 +81,7 @@
     row4cost: [1, 5, 11, 20, 30, 97, 400],
     row5cost: [1, 4, 10, 17, 26, 86, 4000],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
-    row7cost: [160, 480, 900, 2400, 7800, 23230, 56780]
+    row7cost: [160, 8000, 18000, "Infinity", "Infinity", "Infinity", "Infinity"]
   };
   qUpgradeRendered = {a30: true, bought: [], force: false};
 
