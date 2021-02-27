@@ -321,7 +321,11 @@ function renderGridSideInfo() {
       }
     }
     if (gridEditing) {
-      thingToWrite += selectedMachine != thisData.idx ? `<br><br>LM: rotate` : `<br><br>LM: upgrade<br>Shift+LM: max upgrade`;
+      if (selectedMachine != thisData.idx && thisData.hasArrow) {
+        thingToWrite += `<br><br>LM: rotate`;
+      } else if (thisData.hasTier) {
+        thingToWrite += `<br><br>LM: upgrade<br>Shift+LM: max upgrade`;
+      }
       thingToWrite += `<br>RM: remove`;
     }
   } else if (typeof gridOn != "undefined") {
@@ -382,7 +386,7 @@ function canEnterWoemholeChallenge() {
   return game.t4resets.gte(calcWormholeChallengeReq());
 }
 function calcRealDt(dt=0) {
-  return dt*singularityBoosts.SpeedBoost.toNumber()*(game.achievements.includes(37)?2:1);
+  return D(dt).mul(singularityBoosts.SpeedBoost).mul(game.achievements.includes(37)?2:1);
 }
 function calcChallengeDone() {
   return game.wormholeChallengeProgress.reduce((a, b) => a + b, 0);

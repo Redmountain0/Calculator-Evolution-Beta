@@ -26,6 +26,7 @@ tempGame = {
   t2resets: D(0),
   optionToggle: new Array(9).fill(1),
   theme: 0,
+  notation: 0,
   hyperMode: false,
   achievements: [],
   durability: D(1),
@@ -130,7 +131,7 @@ function importGame() {
   } catch (e) {
     commandAppend('invaild savefile!', -110, 1);
   }
-  setTheme();
+  basicInits();
 }
 function undoGame() {
   var uSave = JSON.parse(localStorage[`CalculatorEvolution2_restore${(game.saveRestorePoint-1)%24}`]);

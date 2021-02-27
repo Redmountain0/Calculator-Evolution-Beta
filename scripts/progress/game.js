@@ -120,6 +120,9 @@
   link.media = "screen,print";
   document.getElementsByTagName( "head" )[0].appendChild( link );
 
+  // notation init
+  notationNames = ["Default", "Logarithm"];
+
 })();
 
 function renderBasic() {
@@ -272,6 +275,13 @@ function setEffects() {
 function setTheme() {
   document.getElementById("compactCssElement").href = themeUrls[game.theme];
   document.getElementById("themeBtn").innerHTML = `Theme: ${themeName[game.theme]}`;
+}
+function setNotation() {
+  document.getElementById("notationBtn").innerHTML = `Notation: ${notationNames[game.notation]}`;
+}
+function basicInits() {
+  setTheme();
+  setNotation();
 }
 function calcToggleTabs() {
   if (calcRPGain().gte(1)) game.t2toggle = 1;
