@@ -339,7 +339,7 @@ function shopBuy(num) {
   renderShop();
 }
 function shopMaxBuy(num) {
-  var mPoint = 20, maxA = 2**mPoint;
+  var mPoint = 30, maxA = 2**mPoint;
   for (var i = 0; i < mPoint; i++) {
     maxA += 2**(mPoint-1-i)*((game.money.gte(calcShopCost(num, maxA)))*2-1);
   }

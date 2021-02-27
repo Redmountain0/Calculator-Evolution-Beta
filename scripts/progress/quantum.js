@@ -68,8 +68,8 @@
       "Multiply SP gain based on QL (x${dNotation(D(2).pow(D(game.quantumLab).pow(1/3)), 3, 1)})",
       "Multiply SP gain based on Challenge Recordes (x${dNotation(game.challengeRecord.reduce((a, b) => a.mul(b.add(1)), D(1)).pow(1/4), 4, 1)})",
       "Boost SP's grid machine Power boost based on SP (^${dNotation(D(1).add(game.singularityPower.log(10).pow(0.8)), 4, 3)})",
-      "Coming Soon!",
-      "Coming Soon!"
+      "Boost SP gain based on Processes (x${dNotation(calcMultiProcess(), 4, 0)})",
+      "Passive SP Gain speed affected by Speed Boost"
     ]
   ];
   quantumUpgradeNames = ["Base", "Research", "Quantum", "QoL", "Automate", "Keep", "Singularity"];
@@ -81,7 +81,7 @@
     row4cost: [1, 5, 11, 20, 30, 97, 400],
     row5cost: [1, 4, 10, 17, 26, 86, 4000],
     row6cost: [22, 58, 138, 262, 408, 587, "Infinity"],
-    row7cost: [160, 4500, 24e3, 90e3, 100e3, "Infinity", "Infinity"]
+    row7cost: [160, 4500, 24e3, 90e3, 100e3, 200e3, "Infinity"]
   };
   qUpgradeRendered = {a30: true, bought: [], force: false};
 

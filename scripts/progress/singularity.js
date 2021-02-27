@@ -178,7 +178,7 @@ function calcSingularity(dt) {
   for (var i in singularityBoostsBase) singularityBoosts[i] = D(singularityBoostsBase[i]);
   for (var i in game.singularityGrid) game.singularityGrid[i].update(dt);
   for (var i in mergerWorks) mergerWorks[i] = [...new Set(mergerWorks[i])];
-  if (game.achievements.includes(33)) game.singularityPower = game.singularityPower.add(calcSingularityPowerGain().mul(dt/10));
+  if (game.achievements.includes(33)) game.singularityPower = game.singularityPower.add(calcSingularityPowerGain().mul(game.quantumUpgradeBought.includes('78')?calcRealDt(dt):dt).div(10));
   if (game.challengeEntered != -1) {
     game.challengeRecord[game.challengeEntered] = D.max(game.challengeRecord[game.challengeEntered], game.quantumLab);
     if (game.quantumLab.gte(calcChallengeGoal(game.challengeEntered))) {
@@ -372,6 +372,7 @@ function calcSingularityPowerGain(calcNext=0, baseRes=game.quantumLab) {
   if (game.quantumUpgradeBought.includes('72')) tempSpGain4 = tempSpGain4.mul(D(10).mul(((new Date().getTime() - game.singularityTime)/1000)**0.6));
   if (game.quantumUpgradeBought.includes('73')) tempSpGain4 = tempSpGain4.mul(D(2).pow(D(game.quantumLab).pow(1/3)));
   if (game.quantumUpgradeBought.includes('74')) tempSpGain4 = tempSpGain4.mul(game.challengeRecord.reduce((a, b) => a.mul(b.add(1)), D(1)).pow(1/4));
+  if (game.quantumUpgradeBought.includes('76')) tempSpGain4 = tempSpGain4.mul(calcMultiProcess());
 
   // return SP gain
   if (baseRes.lt(80)) return D(0);
